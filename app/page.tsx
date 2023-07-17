@@ -47,39 +47,33 @@ function SlideNextButton() {
     </button>
   );
 }
+/*export const getServerSideProps: GetServerSideProps<{ data: any }> = async () => {
+  const res = await fetch("https://dummyjson.com/products");
+  const data = await res.json();
+  return { props: { data } };
+};*/
 
-export default function Home({
-  data,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home() {
+  const [data, setData] = useState<any>();
   const dispatch = useDispatch();
+  const loadData = async () => {
+    const res = await fetch("https://dummyjson.com/products")
+      .then((data: any) => {
+        setData(data)
+      })
+  }
+  useEffect(() => {
+    loadData();
+  }, []);
 
   const productList = useSelector((state: any) => state.productList.value);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-
   useEffect(() => {
-    dispatch(fetchProduct(data.products));
-  }, [dispatch]);
-
-  const swipePrev = () => {
-    console.log(currentIndex);
-    if (currentIndex == 0) {
-      setCurrentIndex(banner.length - 1);
-    } else {
-      setCurrentIndex(currentIndex - 1);
+    if (data) {
+      dispatch(fetchProduct(data?.products));
     }
-  };
+  }, [dispatch, data]);
 
-  const swipeNext = () => {
-    console.log(currentIndex);
-
-    if (currentIndex == banner.length - 1) {
-      setCurrentIndex(0);
-    } else {
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
-  console.log(data);
   return (
     <div className="flex flex-col">
       <div className="w-full hidden md:flex  justify-center items-center">
@@ -106,22 +100,6 @@ export default function Home({
             </SwiperSlide>
           ))}
         </Swiper>
-        {/* <div className="p-1 cursor-pointer">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-8 h-8"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M8.25 4.5l7.5 7.5-7.5 7.5"
-            />
-          </svg>
-        </div> */}
       </div>
 
       {/* grid */}
@@ -132,12 +110,4 @@ export default function Home({
       </div>
     </div>
   );
-}
-
-export const getServerSideProps: GetServerSideProps<{
-  data: any
-}> = async () => {
-  const res = await fetch("https://dummyjson.com/products");
-  const data = await res.json()
-  return { props: { data } }
 }
