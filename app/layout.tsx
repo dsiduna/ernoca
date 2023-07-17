@@ -1,15 +1,19 @@
 'use client'
-import { SessionProvider } from 'next-auth/react'
-import Footer from './components/Footer'
-import NavBar from './components/NavBar'
-import './globals.css'
-import { Provider } from 'react-redux'
+import { ReactNode } from 'react';
+import { SessionProvider } from 'next-auth/react';
+import Footer from './components/Footer';
+import NavBar from './components/NavBar';
+import '../globals.css';
+import { Provider } from 'react-redux';
 import { store } from './store/store';
-import Head from 'next/head'
+import Head from 'next/head';
 
-export default function RootLayout({
-  children, session, ...pageProps }: { children: React.ReactNode, session: any }) {
-  
+type RootLayoutProps = {
+  children: ReactNode;
+  session: any;
+};
+
+export default function RootLayout({ children, session }: RootLayoutProps) {
   return (
     <html lang="en">
       <Head>
@@ -24,5 +28,5 @@ export default function RootLayout({
         </Provider>
       </SessionProvider>
     </html>
-  )
+  );
 }
