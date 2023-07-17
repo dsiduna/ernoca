@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from './store/productSlice';
 import Image from "next/image";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
 const banner = [
   "https://m.media-amazon.com/images/I/6124QhAPExL._SX1500_.jpg",
@@ -47,7 +48,9 @@ function SlideNextButton() {
   );
 }
 
-export default function Home(data: any) {
+export default function Home({
+  data,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const dispatch = useDispatch();
 
   const productList = useSelector((state: any) => state.productList.value);
@@ -76,7 +79,7 @@ export default function Home(data: any) {
       setCurrentIndex(currentIndex + 1);
     }
   };
-
+  console.log(data);
   return (
     <div className="flex flex-col">
       <div className="w-full hidden md:flex  justify-center items-center">
@@ -131,12 +134,11 @@ export default function Home(data: any) {
   );
 }
 
-export async function getServerSideProps() {
+
+export const getServerSideProps: GetServerSideProps<{
+  data: any
+}> = async () => {
   const res = await fetch("https://dummyjson.com/products");
-
-  const data = await res.json();
-
-  return {
-    props: { data },
-  };
+  const data = await res.json()
+  return { props: { data } }
 }
