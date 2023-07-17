@@ -134,7 +134,7 @@ export default function Home({
   );
 }
 
-
+'use client'
 export const getServerSideProps: GetServerSideProps<{
   data: any
 }> = async () => {
