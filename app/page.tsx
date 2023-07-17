@@ -79,72 +79,7 @@ export default function Home(data: any) {
 
   return (
     <div className="flex flex-col">
-      {/* new banner */}
-      {/* <div className="w-full bg-slate-50 h-72 flex flex-row">
-        <button className="p-1 cursor-pointer" onClick={swipePrev}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-8 h-8"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15.75 19.5L8.25 12l7.5-7.5"
-            />
-          </svg>
-        </button>
-        <div className="flex-grow bg-slate-200 transition-transform">
-          <Image
-            src={banner[currentIndex]}
-            width={1300}
-            height={300}
-            layout="responsive"
-          />
-        </div>
-
-        <button className="p-1 cursor-pointer" onClick={swipeNext}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-8 h-8"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M8.25 4.5l7.5 7.5-7.5 7.5"
-            />
-          </svg>
-        </button>
-      </div> */}
-
-      {/* Banner */}
       <div className="w-full hidden md:flex  justify-center items-center">
-        {/* <button
-          className="p-1 cursor-pointer"
-          onClick={() => swiper.slideNext()}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-8 h-8"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15.75 19.5L8.25 12l7.5-7.5"
-            />
-          </svg>
-        </button> */}
         <Swiper
           className=""
           // install Swiper modules
