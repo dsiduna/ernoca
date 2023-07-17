@@ -16,8 +16,8 @@ export default function NavBar() {
   const [selectedPerson, setSelectedPerson] = useState<any>();
   const [query, setQuery] = useState("");
   const router = useRouter();
-  const cartItems = useSelector((state: any) => state.cart.value);
-  const productList = useSelector((state: any) => state.productList.value);
+  const cartItems = useSelector((state: any) => state?.cart?.value);
+  const productList = useSelector((state: any) => state?.productList?.value);
 
   const handleOnChangeCombobox = (e: any) => {
     setSelectedPerson(e);
@@ -53,7 +53,7 @@ export default function NavBar() {
             />
             <Combobox.Options className="absolute top-14 w-1/2 ">
               {query === ""
-                ? productList.id
+                ? productList?.id
                 : productList
                   .filter((product: any) => {
                     return product.title
