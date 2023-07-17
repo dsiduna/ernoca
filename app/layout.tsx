@@ -9,19 +9,23 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import Head from 'next/head';
 
-type RootLayoutProps = {
-  children: ReactNode;
-  session: any;
-};
+interface MyAppProps {
+  children: React.ReactNode;
+  pageProps: {
+    session: any;
+    [key: string]: any;
+  };
+}
 
-export default function RootLayout({ children, session }: RootLayoutProps) {
+export default function RootLayout({
+  children, pageProps }: MyAppProps) {
   return (
     <html lang="en">
       <Head>
         <title>Ernoca</title>
         <meta property="og:title" content="E-commerce application" key="title" />
       </Head>
-      <SessionProvider session={session}>
+      <SessionProvider session={pageProps?.session}>
         <Provider store={store}>
           <NavBar />
           {children}
@@ -31,3 +35,5 @@ export default function RootLayout({ children, session }: RootLayoutProps) {
     </html>
   );
 }
+
+
