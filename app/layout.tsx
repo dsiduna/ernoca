@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { SessionProvider } from 'next-auth/react';
 import Footer from './components/Footer';
 import NavBar from './components/NavBar';
-import '../globals.css';
+import './globals.css';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import Head from 'next/head';
