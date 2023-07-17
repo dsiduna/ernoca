@@ -104,7 +104,7 @@ export default function Home() {
 
       {/* grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 m-5 sm:m-10">
-        {productList.map((e: any) => (
+        {productList?.map((e: any) => (
           <ItemCard key={e.id} props={e} />
         ))}
       </div>
