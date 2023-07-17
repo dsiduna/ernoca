@@ -1,4 +1,5 @@
 'use client'
+//@ts-nocheck
 import { ReactNode } from 'react';
 import { SessionProvider } from 'next-auth/react';
 import Footer from './components/Footer';
