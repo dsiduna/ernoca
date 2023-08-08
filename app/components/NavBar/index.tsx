@@ -30,7 +30,7 @@ export default function NavBar() {
         {/* Left Side Bar*/}
         <Link href={"/"}>
           <Image
-            width={150} 
+            width={150}
             height={50}
             src={logo}
             alt="logo"

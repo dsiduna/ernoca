@@ -21,13 +21,15 @@ export default function RootLayout({
         <title>Ernoca</title>
         <meta property="og:title" content="E-commerce application" key="title" />
       </Head>
-      <SessionProvider>
-        <Provider store={store}>
-          <NavBar />
-          {children}
-          <Footer />
-        </Provider>
-      </SessionProvider>
+      <body>
+        <SessionProvider>
+          <Provider store={store}>
+            <NavBar />
+            {children}
+            <Footer />
+          </Provider>
+        </SessionProvider>
+      </body>
     </html>
   );
 }

@@ -1,0 +1,103 @@
+[debug] [2023-08-07T20:27:42.739Z] ----------------------------------------------------------------------
+[debug] [2023-08-07T20:27:42.741Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\mnash\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-08-07T20:27:42.742Z] CLI Version:   12.4.3
+[debug] [2023-08-07T20:27:42.742Z] Platform:      win32
+[debug] [2023-08-07T20:27:42.742Z] Node Version:  v16.16.0
+[debug] [2023-08-07T20:27:42.743Z] Time:          Mon Aug 07 2023 22:27:42 GMT+0200 (South Africa Standard Time)
+[debug] [2023-08-07T20:27:42.743Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-07T20:27:42.827Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-07T20:27:42.828Z] > authorizing via signed-in user (denis.siduna@gmail.com)
+[debug] [2023-08-07T20:27:42.828Z] [iam] checking project ernoca for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-08-07T20:27:42.831Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ernoca:testIamPermissions [none]
+[debug] [2023-08-07T20:27:42.831Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ernoca:testIamPermissions x-goog-quota-user=projects/ernoca
+[debug] [2023-08-07T20:27:42.832Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ernoca:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-07T20:27:45.884Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/ernoca:testIamPermissions 200
+[debug] [2023-08-07T20:27:45.884Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ernoca:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-07T20:27:45.885Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ernoca [none]
+[debug] [2023-08-07T20:27:46.682Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ernoca 200
+[debug] [2023-08-07T20:27:46.682Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ernoca {"projectId":"ernoca","projectNumber":"724979506449","displayName":"ernoca","name":"projects/ernoca","resources":{"hostingSite":"ernoca","realtimeDatabaseInstance":"ernoca-default-rtdb"},"state":"ACTIVE","etag":"1_3b27e969-fa8b-4c9d-bf98-0c912f0220e9"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[info] - info Creating an optimized production build...
+
+[debug] [2023-08-07T20:40:23.995Z] ----------------------------------------------------------------------
+[debug] [2023-08-07T20:40:23.997Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\mnash\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-08-07T20:40:23.997Z] CLI Version:   12.4.3
+[debug] [2023-08-07T20:40:23.998Z] Platform:      win32
+[debug] [2023-08-07T20:40:23.998Z] Node Version:  v16.16.0
+[debug] [2023-08-07T20:40:23.998Z] Time:          Mon Aug 07 2023 22:40:23 GMT+0200 (South Africa Standard Time)
+[debug] [2023-08-07T20:40:23.998Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-07T20:40:24.069Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-07T20:40:24.070Z] > authorizing via signed-in user (denis.siduna@gmail.com)
+[debug] [2023-08-07T20:40:24.070Z] [iam] checking project ernoca for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-08-07T20:40:24.071Z] > refreshing access token with scopes: []
+[debug] [2023-08-07T20:40:24.073Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-08-07T20:40:24.073Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-08-07T20:40:25.189Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-08-07T20:40:25.190Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-08-07T20:40:25.214Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ernoca:testIamPermissions [none]
+[debug] [2023-08-07T20:40:25.215Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ernoca:testIamPermissions x-goog-quota-user=projects/ernoca
+[debug] [2023-08-07T20:40:25.215Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ernoca:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-07T20:40:27.801Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/ernoca:testIamPermissions 200
+[debug] [2023-08-07T20:40:27.801Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ernoca:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-07T20:40:27.806Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ernoca [none]
+[debug] [2023-08-07T20:40:28.765Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ernoca 200
+[debug] [2023-08-07T20:40:28.766Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ernoca {"projectId":"ernoca","projectNumber":"724979506449","displayName":"ernoca","name":"projects/ernoca","resources":{"hostingSite":"ernoca","realtimeDatabaseInstance":"ernoca-default-rtdb"},"state":"ACTIVE","etag":"1_3b27e969-fa8b-4c9d-bf98-0c912f0220e9"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[info] - info Creating an optimized production build...
+
+[debug] [2023-08-08T04:31:59.720Z] ----------------------------------------------------------------------
+[debug] [2023-08-08T04:31:59.722Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\mnash\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-08-08T04:31:59.722Z] CLI Version:   12.4.3
+[debug] [2023-08-08T04:31:59.723Z] Platform:      win32
+[debug] [2023-08-08T04:31:59.723Z] Node Version:  v16.16.0
+[debug] [2023-08-08T04:31:59.723Z] Time:          Tue Aug 08 2023 06:31:59 GMT+0200 (South Africa Standard Time)
+[debug] [2023-08-08T04:31:59.723Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-08T04:31:59.823Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-08T04:31:59.824Z] > authorizing via signed-in user (denis.siduna@gmail.com)
+[debug] [2023-08-08T04:31:59.824Z] [iam] checking project ernoca for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-08-08T04:31:59.825Z] > refreshing access token with scopes: []
+[debug] [2023-08-08T04:31:59.827Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-08-08T04:31:59.827Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-08-08T04:32:00.981Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-08-08T04:32:00.984Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-08-08T04:32:01.031Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ernoca:testIamPermissions [none]
+[debug] [2023-08-08T04:32:01.032Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ernoca:testIamPermissions x-goog-quota-user=projects/ernoca
+[debug] [2023-08-08T04:32:01.034Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ernoca:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-08T04:32:03.293Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/ernoca:testIamPermissions 200
+[debug] [2023-08-08T04:32:03.293Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ernoca:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-08T04:32:03.297Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ernoca [none]
+[debug] [2023-08-08T04:32:04.207Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ernoca 200
+[debug] [2023-08-08T04:32:04.208Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ernoca {"projectId":"ernoca","projectNumber":"724979506449","displayName":"ernoca","name":"projects/ernoca","resources":{"hostingSite":"ernoca","realtimeDatabaseInstance":"ernoca-default-rtdb"},"state":"ACTIVE","etag":"1_3b27e969-fa8b-4c9d-bf98-0c912f0220e9"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[info] - info Creating an optimized production build...
+
