@@ -1,5 +1,7 @@
+// @ts-nocheck 
+
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function ItemCard(props: any) {
@@ -19,6 +21,8 @@ export default function ItemCard(props: any) {
         images,
     } = props;
 
+    console.log(title);
+
     return (
         <div
             onClick={() => router.push(`/product-details/${id}`)}
@@ -26,14 +30,18 @@ export default function ItemCard(props: any) {
         >
             <div className="h-64 w-full relative">
                 <Image
-                    src={
-                        images[0] ??
+                    src={images ?
+                        images[0] :
                         "https://www.intlmag.org/global_graphics/default-store-350x350.jpg"
                     }
                     alt="product image"
-                    layout="fill" // required
-                    objectFit="cover"
-                // className=" h-60 "
+                    fill
+                    // className=" h-60 "
+                    //height={300}
+                    //width={320}
+                    style={{
+                        objectFit: 'cover',
+                    }}
                 />
             </div>
 

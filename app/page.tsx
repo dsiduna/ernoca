@@ -57,20 +57,20 @@ export default function Home() {
   const [data, setData] = useState<any>();
   const dispatch = useDispatch();
   const loadData = async () => {
-    const res = await fetch("https://dummyjson.com/products")
-      .then((data: any) => {
-        setData(data)
-      })
-  }
+    const res = await fetch("https://dummyjson.com/products");
+    const response = await res.json();
+    setData(response);
+  };
   useEffect(() => {
     loadData();
   }, []);
 
   const productList = useSelector((state: any) => state.productList.value);
+  console.log(productList);
 
   useEffect(() => {
     if (data) {
-      dispatch(fetchProduct(data?.products));
+      dispatch(fetchProduct(data.products));
     }
   }, [dispatch, data]);
 
@@ -105,7 +105,7 @@ export default function Home() {
       {/* grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 m-5 sm:m-10">
         {productList?.map((e: any) => (
-          <ItemCard key={e.id} props={e} />
+          <ItemCard key={e.id} {...e} />
         ))}
       </div>
     </div>
