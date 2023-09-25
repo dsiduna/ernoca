@@ -33,9 +33,10 @@ const nextConfig = {
             {
                 protocol: "https",
                 hostname: "**",
-              },
+            },
             //
         ],
+        unoptimized: true
     },
     output: "export",
 }

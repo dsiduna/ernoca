@@ -2,12 +2,11 @@
 //@ts-nocheck
 import { ReactNode } from 'react';
 import { SessionProvider } from 'next-auth/react';
-import Footer from './components/Footer';
-import NavBar from './components/NavBar';
 import './globals.css';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import Head from 'next/head';
+import LayoutProvider from './components/LayoutProvider';
 
 
 export default function RootLayout({
@@ -24,14 +23,16 @@ export default function RootLayout({
       <body>
         <SessionProvider>
           <Provider store={store}>
-            <NavBar />
+            <LayoutProvider>
             {children}
-            <Footer />
+            </LayoutProvider>
           </Provider>
         </SessionProvider>
       </body>
     </html>
   );
 }
+
+
 
 
