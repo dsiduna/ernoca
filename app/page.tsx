@@ -60,12 +60,13 @@ export default function Home() {
     const res = await fetch("https://dummyjson.com/products");
     const response = await res.json();
     setData(response);
+    console.log('we here')
   };
   useEffect(() => {
     loadData();
   }, []);
 
-  const productList = useSelector((state: any) => state.productList.value);
+  const productList = useSelector((state: any) => state?.cars?.value);
   console.log(productList);
 
   useEffect(() => {

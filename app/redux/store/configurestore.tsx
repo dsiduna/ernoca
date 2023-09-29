@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 
 import {
     configureStore,
@@ -29,7 +29,7 @@ const persistConfig = {
     ],
 };
 
-const persistedReducer = - persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export default () => {
     const store = configureStore({
