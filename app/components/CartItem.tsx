@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { removeFromCart } from "../store/cartSlice";
+import { removeFromCart } from "../redux/actions/cart";
 
 export default function CartItem( props: any ) {
   const { id, title, description, thumbnail, price, discountPercentage } =
