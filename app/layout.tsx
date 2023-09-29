@@ -4,10 +4,12 @@ import { ReactNode } from 'react';
 import { SessionProvider } from 'next-auth/react';
 import './globals.css';
 import { Provider } from 'react-redux';
-import { store } from './store/store';
 import Head from 'next/head';
 import LayoutProvider from './components/LayoutProvider';
+import configurestore from './redux/store/configurestore';
+import { PersistGate } from 'redux-persist/integration/react';
 
+const { store, persistor } = configurestore();
 
 export default function RootLayout({
   children,
@@ -24,7 +26,7 @@ export default function RootLayout({
         <SessionProvider>
           <Provider store={store}>
             <LayoutProvider>
-            {children}
+              {children}
             </LayoutProvider>
           </Provider>
         </SessionProvider>

@@ -31,7 +31,8 @@ export const sessionSlice = createSlice({
     },
 });
 
+const { actions, reducer } = sessionSlice
+export const { getSession, removeSession } = actions;
 
-export const { getSession, removeSession } = sessionSlice.actions;
+export default reducer;
 
-export default sessionSlice.reducer;

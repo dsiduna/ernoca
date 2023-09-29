@@ -12,7 +12,7 @@ import "swiper/css/scrollbar";
 import ItemCard from './components/ItemCard';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProduct } from './store/productSlice';
+import { fetchProduct } from "./redux/actions/cars";
 import Image from "next/image";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
