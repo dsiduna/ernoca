@@ -7,7 +7,7 @@ import { useState } from "react"
 
 export default function Admin() {
     const router = useRouter()
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState(false);
     const onLogin = () => {
         console.log("here")
         router.push('/admin/cars')
