@@ -10,7 +10,7 @@ import {
 } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-import { db } from "@/firebase";
+import { db } from "../../../firebase";
 
 export const carsService = createApi({
     baseQuery: fakeBaseQuery(),
