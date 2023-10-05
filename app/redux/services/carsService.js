@@ -19,11 +19,11 @@ export const carsService = createApi({
         addCar: builder.mutation({
             async queryFn(car) {
                 const carData = {
-                    title: car.title,
+                    make: car.make,
+                    model: car.model,
+                    color: car.color,
                     description: car.description,
                     price: car.price,
-                    category: car.category,
-                    specs: car.specs,
                     images: []
                 };
                 try {
