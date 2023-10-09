@@ -165,7 +165,7 @@ const AddCar = ({
 
     return (
         <div className="container mx-auto overflow-hidden">
-            <form onSubmit={handleAddCar}>
+            <form>
                 <div className="flex flex-col justify-center items-center w-full h-[400px] overflow-y-auto">
                     <div className='flex justify-center items-center gap-2 w-full p-2 pt-32'>
                         <InputField
@@ -201,6 +201,7 @@ const AddCar = ({
                             value={carData.mileage}
                             onChange={handleChange}
                             error={errors.mileage}
+                            type='number'
                         />
                     </div>
                     <div className='flex justify-center items-center gap-2 w-full p-2'>
@@ -215,6 +216,7 @@ const AddCar = ({
                             value={carData.price}
                             onChange={handleChange}
                             error={errors.price}
+                            type='number'
                         />
                     </div>
                     <div className="p-2 w-full">
@@ -272,7 +274,7 @@ const AddCar = ({
                 </div>
                 <div className='flex justify-center items-center'>
                     <button
-                        type="submit"
+                        onClick={handleAddCar}
                         className="bg-blue-500 hover:bg-blue-600 text-white  font-medium py-2 px-4 rounded-md"
                     >
                         Submit

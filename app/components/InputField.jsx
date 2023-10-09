@@ -1,13 +1,13 @@
 import React from 'react';
 
-const InputField = ({ label, id, name, value, onChange, error }) => {
+const InputField = ({ label, id, name, value, onChange, error, type = 'text' }) => {
     return (
         <div className="flex flex-col w-full">
             <label htmlFor={id} className="text-md font-medium text-start">
                 {label}:
             </label>
             <input
-                type="text"
+                type={type}
                 id={id}
                 name={name}
                 value={value}
