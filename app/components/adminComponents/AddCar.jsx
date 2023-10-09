@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import addIcon from '../../assets/add.svg';
 import InputField from '../InputField';
 import Image from 'next/image';
+import YearPicker from '../YearPicker';
 
 const AddCar = ({
     addCar = () => { },
@@ -45,9 +46,18 @@ const AddCar = ({
         }));
     };
 
+    const handleYearChange = (e) => {
+        setCarData((prevState) => ({
+            ...prevState,
+            year: e.target.value,
+        }))
+    }
+
     const handleAddPictureClick = () => {
         fileInputRef.current.click();
     };
+
+    console.log(carData);
 
     const handlePictureUpload = (e) => {
         const files = Array.from(e.target.files);
@@ -194,13 +204,9 @@ const AddCar = ({
                         />
                     </div>
                     <div className='flex justify-center items-center gap-2 w-full p-2'>
-                        <InputField
-                            label="Manufacture Year"
-                            id="year"
-                            name="year"
-                            value={carData.year}
-                            onChange={handleChange}
-                            error={errors.year}
+                        <YearPicker
+                            selectedYear={carData.year}
+                            onChange={handleYearChange}
                         />
                         <InputField
                             label="Price"
@@ -277,5 +283,7 @@ const AddCar = ({
     );
 }
 
-export default AddCar
+
+export default AddCar;
+
 
