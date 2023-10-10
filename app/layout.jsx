@@ -1,6 +1,5 @@
 'use client'
 import { ReactNode } from 'react';
-import { SessionProvider } from 'next-auth/react';
 import './globals.css';
 import { Provider } from 'react-redux';
 import Head from 'next/head';
@@ -20,13 +19,11 @@ export default function RootLayout({
         <meta property="og:title" content="E-commerce application" key="title" />
       </Head>
       <body>
-        <SessionProvider>
-          <Provider store={store}>
-            <LayoutProvider>
-              {children}
-            </LayoutProvider>
-          </Provider>
-        </SessionProvider>
+        <Provider store={store}>
+          <LayoutProvider>
+            {children}
+          </LayoutProvider>
+        </Provider>
       </body>
     </html>
   );

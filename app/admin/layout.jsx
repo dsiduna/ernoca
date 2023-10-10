@@ -27,6 +27,8 @@ export default function AdminLayout({ children }) {
                                 width={200}
                                 height={200}
                                 className='pl-12 py-6 hover:opacity-75'
+                                placeholder='blur'
+                                priority
                             />
                             <nav className="flex flex-col p-4">
                                 <Link href="/admin/cars">

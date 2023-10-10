@@ -6,6 +6,26 @@ import InputField from '../InputField';
 import Image from 'next/image';
 import YearPicker from '../YearPicker';
 
+
+const PictureItem = React.memo(({ pictureUrl, alt, onRemove }) => (
+    <div className="relative">
+        <Image
+            src={pictureUrl}
+            alt={alt}
+            className="h-20 w-20 object-cover mr-2 rounded"
+            loader={() => pictureUrl}
+            width={20}
+            height={20}
+        />
+        <button
+            className="absolute top-0 right-0 w-6 h-6 bg-red-500 text-white rounded-full flex justify-center items-center"
+            onClick={onRemove}
+        >
+            ×
+        </button>
+    </div>
+));
+
 const AddCar = ({
     addCar = () => { },
     isAddCarLoading = false,
@@ -21,6 +41,7 @@ const AddCar = ({
         mileage: 0,
         pictures: [],
     });
+    console.log(carData)
 
     const [errors, setErrors] = useState({
         make: '',
@@ -99,12 +120,14 @@ const AddCar = ({
     };
 
     const handleRemovePicture = (index) => {
-        const arr = [...carData.pictures]
-        arr.splice(index, 1);
-        setCarData((prevState) => ({
-            ...prevState,
-            pictures: arr
-        }));
+        setCarData((prevState) => {
+            const updatedPictures = [...prevState.pictures];
+            updatedPictures.splice(index, 1);
+            return {
+                ...prevState,
+                pictures: updatedPictures
+            };
+        });
     };
 
     const validateInputs = () => {
@@ -255,19 +278,13 @@ const AddCar = ({
                                 />
                             </div>
                             {carData.pictures.map((pictureUrl, index) => (
-                                <div key={index} className="relative">
-                                    <img
-                                        src={pictureUrl}
-                                        alt={`Car Picture ${index + 1}`}
-                                        className="h-20 w-20 object-cover mr-2 rounded"
-                                    />
-                                    <button
-                                        className="absolute top-0 right-0 w-6 h-6 bg-red-500 text-white rounded-full flex justify-center items-center"
-                                        onClick={() => handleRemovePicture(index)}
-                                    >
-                                        ×
-                                    </button>
-                                </div>
+                                <PictureItem
+
+                                    key={index}
+                                    pictureUrl={pictureUrl}
+                                    alt={`Car Picture ${index + 1}`}
+                                    onRemove={() => handleRemovePicture(index)}
+                                />
                             ))}
                         </div>
                     </div>
@@ -287,5 +304,6 @@ const AddCar = ({
 
 
 export default AddCar;
+
 
 

@@ -23,7 +23,6 @@ const persistConfig = {
     key: "ernoca",
     storage,
     whitelist: [
-        "auth",
         "cars",
         "accessories"
     ],
