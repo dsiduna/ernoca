@@ -5,6 +5,7 @@ import addIcon from '../../assets/add.svg';
 import InputField from '../InputField';
 import Image from 'next/image';
 import YearPicker from '../YearPicker';
+import AlertAtom from '../AlertAtom';
 
 
 const PictureItem = React.memo(({ pictureUrl, alt, onRemove }) => (
@@ -18,7 +19,7 @@ const PictureItem = React.memo(({ pictureUrl, alt, onRemove }) => (
             height={20}
         />
         <button
-            className="absolute top-0 right-0 w-6 h-6 bg-red-500 text-white rounded-full flex justify-center items-center"
+            className="absolute top-0 right-0  transform -translate-x-1/2 w-6 h-6 bg-red-500 text-white rounded-full flex justify-center items-center"
             onClick={onRemove}
         >
             ×
@@ -34,7 +35,7 @@ const AddCar = ({
     const [carData, setCarData] = useState({
         make: '',
         model: '',
-        year: '',
+        year: new Date().getFullYear() - 29,
         price: '',
         colour: '',
         description: '',
@@ -42,6 +43,7 @@ const AddCar = ({
         pictures: [],
     });
     console.log(carData)
+    const [isValid, setIsValid] = useState(true);
 
     const [errors, setErrors] = useState({
         make: '',
@@ -110,9 +112,10 @@ const AddCar = ({
             if (!validateInputs()) {
                 return;
             }
-
-            addCar(carData);
-            closemodal();
+            if (isValid) {
+                addCar(carData);
+                closemodal();
+            }
         } catch (error) {
             console.log(error);
             closemodal();
@@ -131,7 +134,6 @@ const AddCar = ({
     };
 
     const validateInputs = () => {
-        let isValid = true;
         const newErrors = {
             make: '',
             model: '',
@@ -143,43 +145,40 @@ const AddCar = ({
         };
 
         // Perform validation for each input field
-        if (carData.make.trim() === '') {
+        if (carData.make === '') {
             newErrors.make = 'Make is required';
-            isValid = false;
+            setIsValid(false);
         }
 
-        if (carData.model.trim() === '') {
+        if (carData.model === '') {
             newErrors.model = 'Model is required';
-            isValid = false;
+            setIsValid(false);
         }
 
-        if (carData.year.trim() === '') {
+        if (carData.year === '') {
             newErrors.year = 'Manufacture Year is required';
-            isValid = false;
-        } else if (!/^\d{4}$/.test(carData.year)) {
-            newErrors.year = 'Invalid Manufacture Year';
-            isValid = false;
+            setIsValid(false);
         }
 
-        if (carData.price.trim() === '') {
+        if (carData.price === '') {
             newErrors.price = 'Price is required';
-            isValid = false;
+            setIsValid(false);
         } else if (!/^\d+(\.\d{1,2})?$/.test(carData.price)) {
             newErrors.price = 'Invalid Price';
-            isValid = false;
+            setIsValid(false);
         }
 
-        if (carData.colour.trim() === '') {
+        if (carData.colour === '') {
             newErrors.colour = 'Colour is required';
-            isValid = false;
+            setIsValid(false);
         }
 
-        if (carData.mileage.trim() === '') {
+        if (carData.mileage === '') {
             newErrors.mileage = 'Mileage is required';
-            isValid = false;
+            setIsValid(false);
         } else if (!/^\d+$/.test(carData.mileage)) {
             newErrors.mileage = 'Invalid Mileage';
-            isValid = false;
+            setIsValid(false);
         }
 
         setErrors(newErrors);
@@ -188,116 +187,119 @@ const AddCar = ({
 
     return (
         <div className="container mx-auto overflow-hidden">
-            <form>
-                <div className="flex flex-col justify-center items-center w-full h-[400px] overflow-y-auto">
-                    <div className='flex justify-center items-center gap-2 w-full p-2 pt-32'>
-                        <InputField
-                            label="Make"
-                            id="make"
-                            name="make"
-                            value={carData.make}
-                            onChange={handleChange}
-                            error={errors.make}
-                        />
-                        <InputField
-                            label="Model"
-                            id="model"
-                            name="model"
-                            value={carData.model}
-                            onChange={handleChange}
-                            error={errors.model}
-                        />
-                    </div>
-                    <div className='flex justify-center items-center gap-2 w-full p-2'>
-                        <InputField
-                            label="Colour"
-                            id="colour"
-                            name="colour"
-                            value={carData.colour}
-                            onChange={handleChange}
-                            error={errors.colour}
-                        />
-                        <InputField
-                            label="Mileage"
-                            id="mileage"
-                            name="mileage"
-                            value={carData.mileage}
-                            onChange={handleChange}
-                            error={errors.mileage}
-                            type='number'
-                        />
-                    </div>
-                    <div className='flex justify-center items-center gap-2 w-full p-2'>
-                        <YearPicker
-                            selectedYear={carData.year}
-                            onChange={handleYearChange}
-                        />
-                        <InputField
-                            label="Price"
-                            id="price"
-                            name="price"
-                            value={carData.price}
-                            onChange={handleChange}
-                            error={errors.price}
-                            type='number'
-                        />
-                    </div>
-                    <div className="p-2 w-full">
-                        <label htmlFor="description" className="text-md font-medium">
-                            Description:
-                        </label>
-                        <textarea
-                            id="description"
-                            name="description"
-                            value={carData.description}
-                            onChange={handleChange}
-                            className="w-full border border-gray-300 rounded-md py-2 px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        ></textarea>
-                    </div>
-                    <div className="p-2 w-full">
-                        <label htmlFor="pictures" className="text-md font-medium">
-                            Pictures:
-                        </label>
-                        <div className='flex items-center justify-start gap-2 mt-2'>
-                            <div className="flex justify-center items-center h-20 w-20 ">
-                                <label htmlFor="pictures" className="text-lg font-medium cursor-pointer">
-                                    <Image
-                                        src={addIcon}
-                                        alt=""
-                                        className="w-8 h-8 mr-2"
-                                        onClick={() => handleAddPictureClick()}
-                                    />
-                                </label>
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    multiple
-                                    onChange={handlePictureUpload}
-                                    ref={fileInputRef}
-                                    className="hidden"
+            {!isValid && <AlertAtom
+                msg='hahahaha'
+                buttonLabel='hehehe'
+            />
+            }
+            <div className="flex flex-col justify-center items-center w-full h-[400px] overflow-y-auto">
+                <div className='flex justify-center items-center gap-2 w-full p-2 pt-32'>
+                    <InputField
+                        label="Make"
+                        id="make"
+                        name="make"
+                        value={carData.make}
+                        onChange={handleChange}
+                        error={errors.make}
+                    />
+                    <InputField
+                        label="Model"
+                        id="model"
+                        name="model"
+                        value={carData.model}
+                        onChange={handleChange}
+                        error={errors.model}
+                    />
+                </div>
+                <div className='flex justify-center items-center gap-2 w-full p-2'>
+                    <InputField
+                        label="Colour"
+                        id="colour"
+                        name="colour"
+                        value={carData.colour}
+                        onChange={handleChange}
+                        error={errors.colour}
+                    />
+                    <InputField
+                        label="Mileage"
+                        id="mileage"
+                        name="mileage"
+                        value={carData.mileage}
+                        onChange={handleChange}
+                        error={errors.mileage}
+                        type='number'
+                    />
+                </div>
+                <div className='flex justify-center items-center gap-2 w-full p-2'>
+                    <YearPicker
+                        selectedYear={carData.year}
+                        onChange={handleYearChange}
+                    />
+                    <InputField
+                        label="Price"
+                        id="price"
+                        name="price"
+                        value={carData.price}
+                        onChange={handleChange}
+                        error={errors.price}
+                        type='number'
+                    />
+                </div>
+                <div className="p-2 w-full">
+                    <label htmlFor="description" className="text-md font-medium">
+                        Description:
+                    </label>
+                    <textarea
+                        id="description"
+                        name="description"
+                        value={carData.description}
+                        onChange={handleChange}
+                        className="w-full border border-gray-300 rounded-md py-2 px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    ></textarea>
+                </div>
+                <div className="p-2 w-full">
+                    <label htmlFor="pictures" className="text-md font-medium">
+                        Pictures:
+                    </label>
+                    <div className='grid grid-cols-4 gap-2 mt-2'>
+                        <div className="flex justify-center items-center h-20 w-20 ">
+                            <label htmlFor="pictures" className="text-lg font-medium cursor-pointer">
+                                <Image
+                                    src={addIcon}
+                                    alt=""
+                                    className="w-8 h-8 mr-2"
+                                    onClick={() => handleAddPictureClick()}
                                 />
-                            </div>
-                            {carData.pictures.map((pictureUrl, index) => (
-                                <PictureItem
-
-                                    key={index}
-                                    pictureUrl={pictureUrl}
-                                    alt={`Car Picture ${index + 1}`}
-                                    onRemove={() => handleRemovePicture(index)}
-                                />
-                            ))}
+                            </label>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                multiple
+                                onChange={handlePictureUpload}
+                                ref={fileInputRef}
+                                className="hidden"
+                            />
                         </div>
+                        {carData.pictures.map((pictureUrl, index) => (
+                            <PictureItem
+
+                                key={index}
+                                pictureUrl={pictureUrl}
+                                alt={`Car Picture ${index + 1}`}
+                                onRemove={() => handleRemovePicture(index)}
+                            />
+                        ))}
                     </div>
                 </div>
-                <div className='flex justify-center items-center'>
-                    <button
-                        onClick={handleAddCar}
-                        className="bg-blue-500 hover:bg-blue-600 text-white  font-medium py-2 px-4 rounded-md"
-                    >
-                        Submit
-                    </button>
-                </div>
-            </form>
+            </div>
+            <div className='flex justify-center items-center'>
+                <button
+                    onClick={handleAddCar}
+                    className="bg-blue-500 hover:bg-blue-600 text-white  font-medium py-2 px-4 rounded-md"
+                >
+                    Submit
+                </button>
+            </div>
         </div>
     );
 }
