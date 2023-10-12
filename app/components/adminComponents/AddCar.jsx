@@ -50,11 +50,9 @@ const AddCar = ({
     const [errors, setErrors] = useState({
         make: '',
         model: '',
-        year: '',
         price: '',
         colour: '',
         description: '',
-        mileage: '',
     });
 
     const fileInputRef = useRef(null);
@@ -65,10 +63,7 @@ const AddCar = ({
             ...prevState,
             [name]: value,
         }));
-        setErrors((prevErrors) => ({
-            ...prevErrors,
-            [name]: '', // Clear the error message when the input value changes
-        }));
+        handleClearErrors();
     };
 
     const handleYearChange = (e) => {
@@ -115,22 +110,6 @@ const AddCar = ({
         }))
     }
 
-    const handleAddCar = async () => {
-        try {
-            // Perform input validation before submitting
-            if (!validateInputs()) {
-                return;
-            }
-            if (isValid) {
-                addCar(carData);
-                closemodal();
-            }
-        } catch (error) {
-            console.log(error);
-            closemodal();
-        }
-    };
-
     const handleRemovePicture = (index) => {
         setCarData((prevState) => {
             const updatedPictures = [...prevState.pictures];
@@ -146,64 +125,85 @@ const AddCar = ({
         const newErrors = {
             make: '',
             model: '',
-            year: '',
             price: '',
             colour: '',
             description: '',
-            mileage: '',
         };
+        let isValid = true;
 
-        // Perform validation for each input field
         if (carData.make === '') {
             newErrors.make = 'Make is required';
-            setIsValid(false);
+            isValid = false;
         }
 
         if (carData.model === '') {
             newErrors.model = 'Model is required';
-            setIsValid(false);
-        }
-
-        if (carData.year === '') {
-            newErrors.year = 'Manufacture Year is required';
-            setIsValid(false);
+            isValid = false;
         }
 
         if (carData.price === '') {
             newErrors.price = 'Price is required';
-            setIsValid(false);
+            isValid = false;
         } else if (!/^\d+(\.\d{1,2})?$/.test(carData.price)) {
             newErrors.price = 'Invalid Price';
-            setIsValid(false);
+            isValid = false;
         }
 
         if (carData.colour === '') {
             newErrors.colour = 'Colour is required';
-            setIsValid(false);
+            isValid = false;
         }
 
         if (carData.mileage === '') {
             newErrors.mileage = 'Mileage is required';
-            setIsValid(false);
+            isValid = false;
         } else if (!/^\d+$/.test(carData.mileage)) {
             newErrors.mileage = 'Invalid Mileage';
-            setIsValid(false);
+            isValid = false;
         }
 
         setErrors(newErrors);
+        setIsValid(isValid);
+
         return isValid;
+    };
+
+    const handleClearErrors = () => {
+        setIsValid(true);
+        setErrors({
+            make: '',
+            model: '',
+            price: '',
+            colour: '',
+            description: '',
+        })
+    }
+
+    const handleAddCar = async () => {
+        try {
+            if (!validateInputs()) {
+                return;
+            }
+
+            // Perform further actions for adding the car
+            // and closing the modal
+        } catch (error) {
+            console.log(error);
+            // Handle error here
+        }
     };
 
 
     return (
         <div className="container mx-auto overflow-hidden">
             {!isValid && <AlertAtom
-                msg='hahahaha'
-                buttonLabel='hehehe'
+                msg='Plese fill in ALL required fields and retry'
+                buttonLabel='Ok'
+                action={handleClearErrors}
             />
             }
             <div className="flex flex-col justify-center items-center w-full h-[400px] overflow-y-auto">
-                <div className='flex justify-center items-center gap-2 w-full p-2 pt-32'>
+                <div className='flex justify-center items-center gap-2 w-full p-2 pt-52'>
                     <InputField
                         label="Make"
                         id="make"
@@ -271,9 +271,9 @@ const AddCar = ({
                     <label htmlFor="phone" className="text-md font-medium">
                         Seller WhatsApp No:
                     </label>
-                    
+
                     <PhoneInput
-                        inputStyle={{ width: '100%', marginBlock: '2px'}}
+                        inputStyle={{ width: '100%', marginBlock: '2px' }}
                         country={'zw'}
                         value={carData.phone}
                         onChange={phone => handlePhoneChange(phone)}
