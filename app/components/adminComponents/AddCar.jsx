@@ -7,6 +7,8 @@ import Image from 'next/image';
 import YearPicker from '../YearPicker';
 import AlertAtom from '../AlertAtom';
 
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 const PictureItem = React.memo(({ pictureUrl, alt, onRemove }) => (
     <div className="relative">
@@ -39,10 +41,10 @@ const AddCar = ({
         price: '',
         colour: '',
         description: '',
+        phone: '',
         mileage: 0,
         pictures: [],
     });
-    console.log(carData)
     const [isValid, setIsValid] = useState(true);
 
     const [errors, setErrors] = useState({
@@ -105,6 +107,13 @@ const AddCar = ({
             pictures: '', // Clear the error message after successful upload
         }));
     };
+
+    const handlePhoneChange = (phone) => {
+        setCarData((prevState) => ({
+            ...prevState,
+            phone: phone,
+        }))
+    }
 
     const handleAddCar = async () => {
         try {
@@ -185,6 +194,7 @@ const AddCar = ({
         return isValid;
     };
 
+
     return (
         <div className="container mx-auto overflow-hidden">
             {!isValid && <AlertAtom
@@ -256,6 +266,18 @@ const AddCar = ({
                         onChange={handleChange}
                         className="w-full border border-gray-300 rounded-md py-2 px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
                     ></textarea>
+                </div>
+                <div className='p-2 w-full gap-2'>
+                    <label htmlFor="phone" className="text-md font-medium">
+                        Seller WhatsApp No:
+                    </label>
+                    
+                    <PhoneInput
+                        inputStyle={{ width: '100%', marginBlock: '2px'}}
+                        country={'zw'}
+                        value={carData.phone}
+                        onChange={phone => handlePhoneChange(phone)}
+                    />
                 </div>
                 <div className="p-2 w-full">
                     <label htmlFor="pictures" className="text-md font-medium">
