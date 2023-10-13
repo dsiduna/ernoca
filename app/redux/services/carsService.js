@@ -20,22 +20,26 @@ export const carsService = createApi({
                 const carData = {
                     make: car.make,
                     model: car.model,
-                    color: car.color,
                     description: car.description,
                     price: car.price,
-                    images: []
+                    images: [],
+                    year: car.year,
+                    colour: car.colour,
+                    phone: car.phone,
+                    mileage: car.mileage,
                 };
                 try {
                     const carRef = doc(collection(db, "cars"));
                     const storage = getStorage();
                     const storageRef = ref(storage);
 
-                    for (let i = 0; i < car.images.length; i++) {
-                        const image = car.images[i];
+                    for (let i = 0; i < car.pictures.length; i++) {
+                        const image = car.pictures[i];
                         const imageRef = ref(storageRef, `carImages/${carRef.id}/${image.name}`);
                         await uploadBytes(imageRef, image);
                         const imageUrl = await getDownloadURL(imageRef);
                         carData.images.push(imageUrl);
+                        console.log("here" + i)
                     }
                     await setDoc(carRef, carData);
                     console.log('Product added successfully!');

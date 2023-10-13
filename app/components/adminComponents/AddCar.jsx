@@ -21,7 +21,7 @@ const PictureItem = React.memo(({ pictureUrl, alt, onRemove }) => (
             height={20}
         />
         <button
-            className="absolute top-0 right-0  transform -translate-x-1/2 w-6 h-6 bg-red-500 text-white rounded-full flex justify-center items-center"
+            className="absolute -mt-2 top-0 right-0 w-4 h-4 bg-red-500 text-white rounded-full flex justify-center items-center"
             onClick={onRemove}
         >
             ×
@@ -89,10 +89,10 @@ const AddCar = ({
             return;
         }
 
-        const pictureUrls = files.map((file) => URL.createObjectURL(file));
+        const pictureFiles = files.map((file) => file);
         setCarData((prevState) => ({
             ...prevState,
-            pictures: prevState.pictures.concat(pictureUrls),
+            pictures: prevState.pictures.concat(pictureFiles),
         }));
 
         // Reset the file input value after uploading
@@ -185,8 +185,7 @@ const AddCar = ({
                 return;
             }
 
-            // Perform further actions for adding the car
-            // and closing the modal
+            await addCar(carData)
         } catch (error) {
             console.log(error);
             // Handle error here
@@ -306,7 +305,7 @@ const AddCar = ({
                             <PictureItem
 
                                 key={index}
-                                pictureUrl={pictureUrl}
+                                pictureUrl={URL.createObjectURL(pictureUrl)}
                                 alt={`Car Picture ${index + 1}`}
                                 onRemove={() => handleRemovePicture(index)}
                             />
