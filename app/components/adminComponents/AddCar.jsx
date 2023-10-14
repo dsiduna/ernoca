@@ -9,6 +9,11 @@ import AlertAtom from '../AlertAtom';
 
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import loader from '../../assets/loading.gif';
+import { updateModal } from '../../redux/actions/modals';
+import { useDispatch } from 'react-redux';
+
+import { useAddCarMutation } from '../../redux/services/carsService';
 
 const PictureItem = React.memo(({ pictureUrl, alt, onRemove }) => (
     <div className="relative">
@@ -29,12 +34,10 @@ const PictureItem = React.memo(({ pictureUrl, alt, onRemove }) => (
     </div>
 ));
 
-const AddCar = ({
-    addCar = () => { },
-    isAddCarLoading = false,
-    closemodal = () => { },
-}) => {
-    const [carData, setCarData] = useState({
+const AddCar = () => {
+    const dispatch = useDispatch();
+    const [addCar, { isLoading: isAddCarLoading }] = useAddCarMutation();
+    const initialState = {
         make: '',
         model: '',
         year: new Date().getFullYear() - 29,
@@ -44,7 +47,8 @@ const AddCar = ({
         phone: '',
         mileage: 0,
         pictures: [],
-    });
+    }
+    const [carData, setCarData] = useState(initialState);
     const [isValid, setIsValid] = useState(true);
 
     const [errors, setErrors] = useState({
@@ -185,10 +189,12 @@ const AddCar = ({
                 return;
             }
 
-            await addCar(carData)
+            await addCar(carData).then(() => {
+                setCarData(initialState)
+                dispatch(updateModal("Congratulations"));
+            })
         } catch (error) {
             console.log(error);
-            // Handle error here
         }
     };
 
@@ -313,13 +319,22 @@ const AddCar = ({
                     </div>
                 </div>
             </div>
-            <div className='flex justify-center items-center'>
-                <button
-                    onClick={handleAddCar}
-                    className="bg-blue-500 hover:bg-blue-600 text-white  font-medium py-2 px-4 rounded-md"
-                >
-                    Submit
-                </button>
+            <div className='flex justify-center items-center flex-col'>
+                {isAddCarLoading ? (
+                    <Image
+                        src={loader}
+                        alt=''
+                        width={48}
+                        height={48}
+                    />
+                ) : (
+                    <button
+                        onClick={handleAddCar}
+                        className="bg-blue-500 hover:bg-blue-600 text-white  font-medium py-2 px-4 rounded-md"
+                    >
+                        Submit
+                    </button>
+                )}
             </div>
         </div>
     );

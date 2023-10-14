@@ -1,41 +1,46 @@
 'use client'
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import SearchBar from '../../components/Searchbar'
 import FilterDropdown from "../../components/FilterDropDown";
-import AddCar from "../../components/adminComponents/AddCar";
-import Modal from '../../components/Modal';
-import { useAddCarMutation } from "../../redux/services/carsService";
-
+import AdminModalHOC from '../../components/modals/AdminModalHOC';
+import { updateModal } from "../../redux/actions/modals";
+import { useGetCarsMutation } from "../../redux/services/carsService";
+import CarCard from "../../components/adminComponents/CarCard";
 
 const Cars = () => {
   const options = ['Option 1', 'Option 2', 'Option 3'];
-  const [addCar, { isLoading: isAddCarLoading }] = useAddCarMutation();
-  const [openAddCarModal, setOpenAddCarModal] = useState(false);
-  const [data, setData] = useState({
-    title: '',
-    description: '',
-    specs: '',
-    price: 0,
-    category: '',
-    images: [],
-  });
+  const [open, setOpen] = useState(false);
+  const [cars, setCars] = useState([]);
+  const dispatch = useDispatch();
+
+  const [getCars, { isLoading: isGetCarsLoading }] = useGetCarsMutation();
+
+  const loadData = async () => {
+    await getCars()
+      .then((response) => {
+        setCars(response?.data);
+      })
+  }
+  useEffect(() => {
+    loadData()
+  }, [])
+
+  console.log(cars);
+
+
+  const onAddCarClick = () => {
+    dispatch(updateModal('Add Car'));
+    setOpen(true);
+  }
+
   return (
     <>
-      <Modal
-        open={openAddCarModal}
-        setOpen={setOpenAddCarModal}
-        size='w-[600px] h-[548px]'
-        content={
-          <AddCar
-            closemodal={() => setOpenAddCarModal(false)}
-            addCar={addCar}
-            isAddCarLoading={isAddCarLoading}
-          />
-        }
-        title="Add Car"
+      <AdminModalHOC
+        open={open}
+        setOpen={setOpen}
       />
-      <div>
+      <div className="w-full">
         <div className='p-8 text-[32px] text-center font-semibold'>
           Cars
         </div>
@@ -52,9 +57,9 @@ const Cars = () => {
             />
           </div>
         </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pt-[20px] gap-2'>
-          <div className="h-300px bg-white shadow-xl rounded-xl flex flex-col items-center justify-center  max-w-[300px] py-8"
-            onClick={() => setOpenAddCarModal(true)}
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pt-[20px] gap-2 items-center justify-center'>
+          <div className="h-300px bg-white shadow-xl rounded-xl flex flex-col items-center justify-center  max-w-[300px] p-8 h-48"
+            onClick={onAddCarClick}
           >
             <svg
               className="w-12 h-12 text-gray-500 cursor-pointer"
@@ -74,6 +79,12 @@ const Cars = () => {
               Add New Car
             </div>
           </div>
+          {cars.map((car) => (
+            <CarCard
+              setOpen={setOpen}
+              car={car}
+            />
+          ))}
         </div>
       </div>
     </>

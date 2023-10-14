@@ -60,11 +60,14 @@ export const carsService = createApi({
         }),
         getCars: builder.mutation({
             async queryFn() {
-                const carRef = doc(db, 'cars')
+                const carsRef = collection(db, 'cars');
                 try {
-                    await getDocs(carRef)
+                    const snapshot = await getDocs(carsRef);
+                    const cars = snapshot.docs.map((doc) => doc.data());
+                    return { data: cars };
                 } catch (error) {
-                    console.log(error)
+                    console.log(error);
+                    return { error: error.message };
                 }
             }
         }),
