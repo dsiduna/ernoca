@@ -18,6 +18,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import rootReducer from "./rootReducer";
 import { carsService } from "../services/carsService";
+import { accessoriesService } from "../services/accessoriesService";
 
 const persistConfig = {
     key: "ernoca",
@@ -30,17 +31,20 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export default () => {
-    const store = configureStore({
-        reducer: persistedReducer,
-        middleware: getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-            },
-        }).concat([
-            carsService.middleware,
-        ])
-    })
-    const persistor = persistStore(store);
-    return { store, persistor };
+export default function configureAppStore() {
+  const middleware = getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  });
+
+  const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(carsService.middleware, accessoriesService.middleware),
+  });
+
+  const persistor = persistStore(store);
+
+  return { store, persistor };
 }

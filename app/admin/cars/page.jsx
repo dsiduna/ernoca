@@ -5,28 +5,17 @@ import SearchBar from '../../components/Searchbar'
 import FilterDropdown from "../../components/FilterDropDown";
 import AdminModalHOC from '../../components/modals/AdminModalHOC';
 import { updateModal } from "../../redux/actions/modals";
-import { useGetCarsMutation } from "../../redux/services/carsService";
+import { useGetCarsQuery } from "../../redux/services/carsService";
 import CarCard from "../../components/adminComponents/CarCard";
 
 const Cars = () => {
   const options = ['Option 1', 'Option 2', 'Option 3'];
   const [open, setOpen] = useState(false);
-  const [cars, setCars] = useState([]);
   const dispatch = useDispatch();
 
-  const [getCars, { isLoading: isGetCarsLoading }] = useGetCarsMutation();
+  const { data: cars, isLoading: isGetCarsLoading } = useGetCarsQuery();
 
-  const loadData = async () => {
-    await getCars()
-      .then((response) => {
-        setCars(response?.data);
-      })
-  }
-  useEffect(() => {
-    loadData()
-  }, [])
 
-  console.log(cars);
 
 
   const onAddCarClick = () => {
@@ -79,7 +68,7 @@ const Cars = () => {
               Add New Car
             </div>
           </div>
-          {cars.map((car) => (
+          {cars?.map((car) => (
             <CarCard
               setOpen={setOpen}
               car={car}

@@ -1,6 +1,5 @@
 import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
-    arrayUnion,
     collection,
     doc,
     deleteDoc,
@@ -12,71 +11,70 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { db } from "../../../firebase";
 
-export const carsService = createApi({
+export const accessoriesService = createApi({
+    reducerPath: 'carsService',
     baseQuery: fakeBaseQuery(),
     endpoints: (builder) => ({
-        addCar: builder.mutation({
-            async queryFn(car) {
-                const carData = {
-                    make: car.make,
+        addAccessory: builder.mutation({
+            async queryFn(accessory) {
+                const accessoryData = {
+                    /*make: car.make,
                     model: car.model,
                     description: car.description,
                     price: car.price,
-                    images: [],
                     year: car.year,
                     colour: car.colour,
                     phone: car.phone,
-                    mileage: car.mileage,
+                    mileage: car.mileage,*/
+                    images: [],
                 };
                 try {
-                    const carRef = doc(collection(db, "cars"));
+                    const accessoryRef = doc(collection(db, 'accessories'));
                     const storage = getStorage();
                     const storageRef = ref(storage);
 
-                    for (let i = 0; i < car.pictures.length; i++) {
-                        const image = car.pictures[i];
-                        const imageRef = ref(storageRef, `carImages/${carRef.id}/${image.name}`);
+                    for (let i = 0; i < accessory.pictures.length; i++) {
+                        const image = accessory.pictures[i];
+                        const imageRef = ref(storageRef, `accessoryImages/${accessoryRef.id}/${image.name}`);
                         await uploadBytes(imageRef, image);
                         const imageUrl = await getDownloadURL(imageRef);
-                        carData.images.push(imageUrl);
-                        console.log("here" + i)
+                        accessoryData.images.push(imageUrl);
                     }
-                    await setDoc(carRef, carData);
+                    await setDoc(accessoryRef, accessoryData);
                     console.log('Product added successfully!');
                 } catch (error) {
                     console.error('Error adding product:', error);
                 }
             }
         }),
-        deleteCar: builder.mutation({
+        deleteAccessory: builder.mutation({
             async queryFn(id) {
-                const carRef = doc(db, 'cars', id)
+                const accessoryRef = doc(db, 'accessories', id)
                 try {
-                    await deleteDoc(carRef)
+                    await deleteDoc(accessoryRef)
                 } catch (error) {
                     console.log(error)
                 }
             }
         }),
-        getCars: builder.query({
+        getAccessories: builder.mutation({
             async queryFn() {
-                const carsRef = collection(db, 'cars');
+                const accessoriesRef = collection(db, 'accessories');
                 try {
-                    const snapshot = await getDocs(carsRef);
-                    const cars = snapshot.docs.map((doc) => doc.data());
-                    console.log(cars);
-                    return { data: cars };
+                    const snapshot = await getDocs(accessoriesRef);
+                    const accessories = snapshot.docs.map((doc) => doc.data());
+                    return { data: accessories };
                 } catch (error) {
                     console.log(error);
-                    throw new Error(error.message);
+                    return { error: error.message };
                 }
-            },
+            }
         }),
-        getSingleCar: builder.mutation({
+        getSingleAccessory: builder.mutation({
             async queryFn(id) {
-                const carRef = doc(db, 'cars', id)
+                const accessoryRef = doc(db, 'accessories', id)
                 try {
-                    await getDoc(carRef)
+                    await getDoc(accessoryRef)
                 } catch (error) {
                     console.log(error)
                 }
@@ -86,8 +84,8 @@ export const carsService = createApi({
 })
 
 export const {
-    useAddCarMutation,
-    useDeleteCarMutation,
-    useGetCarsQuery,
-    useGetSingleCarMutation
-} = carsService;
+    useAddAccessoryMutation,
+    useDeleteAccessoryMutation,
+    useGetAccessoriesMutation,
+    useGetSingleAccessoryMutation,
+} = accessoriesService;
