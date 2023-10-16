@@ -31,8 +31,8 @@ const CarCard = ({ car, setOpen = () => { } }) => {
                         </div>
                         <div className='pb-12'>
                             <Slider {...settings}>
-                                {car.images.map((image) => (
-                                    <div>
+                                {car.images.map((image, index) => (
+                                    <div key={index}>
                                         <Image
                                             src={image}
                                             alt=''

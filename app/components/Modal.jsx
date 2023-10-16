@@ -59,6 +59,7 @@ const Modal = ({
                                                         alt=""
                                                         height={24}
                                                         width={24}
+                                                        className="cursor-pointer"
                                                     />
                                                 </div>
                                                 {showBackButton && (

@@ -4,7 +4,10 @@ import { useSelector } from "react-redux";
 import Modal from '../Modal'
 import AddCar from '../adminComponents/AddCar'
 import Congratulations from '../adminComponents/Congratulations'
-import { ViewCar } from "../adminComponents/ViewCar";
+import ViewCar from '../adminComponents/ViewCar'
+import ViewAccessory from "../adminComponents/ViewAccessory";
+import DeleteItem from '../adminComponents/DeleteItem';
+import UpdateItem from '../adminComponents/UpdateItem';
 
 function AdminModalHOC({ open, setOpen }) {
     const { data: menu } = useSelector((state) => state?.modal);
@@ -37,11 +40,31 @@ function AdminModalHOC({ open, setOpen }) {
                 <Modal
                     open={open}
                     setOpen={setOpen}
-                    size='w-[600px] h-[548px]'
+                    size='w-[550px] h-[640px]'
                     title='Car'
                     content={<ViewCar />}
                 />
-            )
+            );
+        case 'Delete Item':
+            return (
+                <Modal
+                    open={open}
+                    setOpen={setOpen}
+                    size='w-[550px] h-[640px]'
+                    title='Delete'
+                    content={<DeleteItem />}
+                />
+            );
+        case 'Edit Item':
+            return (
+                <Modal
+                    open={open}
+                    setOpen={setOpen}
+                    size='w-[550px] h-[640px]'
+                    title='Edit'
+                    content={<UpdateItem />}
+                />
+            );
         default:
             break;
     }
