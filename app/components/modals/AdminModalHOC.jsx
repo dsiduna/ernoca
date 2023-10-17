@@ -50,7 +50,7 @@ function AdminModalHOC({ open, setOpen }) {
                 <Modal
                     open={open}
                     setOpen={setOpen}
-                    size='w-[380px] h-[260px]'
+                    size='w-[380px] h-[220px]'
                     title='Delete'
                     content={<DeleteItem  closeModal={()=> setOpen(false)}/>}
                 />

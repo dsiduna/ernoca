@@ -25,7 +25,7 @@ const CarCard = ({ car, setOpen = () => { } }) => {
     return (
         <div>
             <div className='flex flex-wrap justify-center items-center'>
-                <div className='container mx-auto px-4 mt-16'>
+                <div className='container mx-auto'>
                     <div className='relative flex flex-col min-w-0 break-words bg-white mb-6 shadow-xl rounded-lg'>
                         <div className='px-6 flex flex-col'>
                         </div>

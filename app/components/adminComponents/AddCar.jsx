@@ -55,6 +55,7 @@ const AddCar = () => {
         price: '',
         colour: '',
         description: '',
+        pictures: '',
     });
 
     const fileInputRef = useRef(null);
@@ -62,8 +63,6 @@ const AddCar = () => {
     const handleAddPictureClick = () => {
         fileInputRef.current.click();
     };
-
-    console.log(carData);
 
     const handlePictureUpload = (e) => {
         const files = Array.from(e.target.files);
@@ -107,6 +106,7 @@ const AddCar = () => {
             price: '',
             colour: '',
             description: '',
+            pictures: '',
         };
         let isValid = true;
 
@@ -130,6 +130,10 @@ const AddCar = () => {
 
         if (carData.colour === '') {
             newErrors.colour = 'Colour is required';
+            isValid = false;
+        }
+        if (carData.pictures.length < 1) {
+            newErrors.pictures = 'Attach Pictures';
             isValid = false;
         }
 
@@ -172,7 +176,6 @@ const AddCar = () => {
             console.log(error);
         }
     };
-console.log(carData)
 
     return (
         <div className="container mx-auto overflow-hidden">

@@ -1,4 +1,3 @@
-
 'use client'
 
 import React, { useState, useRef } from 'react';
@@ -13,11 +12,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import CarInput from './CarInput'
 import { PictureItem } from './AddCar';
 
-import { useAddCarMutation } from '../../redux/services/carsService';
+import { useUpdateCarMutation } from '../../redux/services/carsService';
 
 const UpdateItem = () => {
   const dispatch = useDispatch();
   const {
+    id = '',
     make = '',
     model = '',
     year = 0,
@@ -29,8 +29,9 @@ const UpdateItem = () => {
     images = [],
   } = useSelector((state) => state.modal.car)
 
-  const [addCar, { isLoading: isAddCarLoading }] = useAddCarMutation();
+  const [updateCar, { isLoading: isUpdateCarLoading }] = useUpdateCarMutation();
   const initialState = {
+    id: id,
     make: make,
     model: model,
     year: year,
@@ -57,8 +58,6 @@ const UpdateItem = () => {
   const handleAddPictureClick = () => {
     fileInputRef.current.click();
   };
-
-  console.log(carData);
 
   const handlePictureUpload = (e) => {
     const files = Array.from(e.target.files);
@@ -159,7 +158,7 @@ const UpdateItem = () => {
         return;
       }
 
-      await addCar(carData).then(() => {
+      await updateCar(carData).then(() => {
         setCarData(initialState)
         dispatch(updateModal("Congratulations"));
       })
@@ -219,8 +218,8 @@ const UpdateItem = () => {
           </div>
         </div>
       </div>
-      <div className='flex justify-center items-center flex-col'>
-        {isAddCarLoading ? (
+      <div className='flex justify-center items-center flex-col pt-4'>
+        {isUpdateCarLoading ? (
           <Image
             src={loader}
             alt=''

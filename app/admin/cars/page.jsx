@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import SearchBar from '../../components/Searchbar'
 import FilterDropdown from "../../components/FilterDropDown";
@@ -7,19 +7,25 @@ import AdminModalHOC from '../../components/modals/AdminModalHOC';
 import { updateModal } from "../../redux/actions/modals";
 import { useGetCarsQuery } from "../../redux/services/carsService";
 import CarCard from "../../components/adminComponents/CarCard";
+import CarCardLoading from '../../components/adminComponents/CarCardLoading';
 
 const Cars = () => {
   const options = ['Option 1', 'Option 2', 'Option 3'];
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const { data: cars, isLoading: isGetCarsLoading } = useGetCarsQuery();
+  const { data: cars, isLoading: isGetCarsLoading, refetch: refetchCars } = useGetCarsQuery();
 
   const onAddCarClick = () => {
     dispatch(updateModal('Add Car'));
     setOpen(true);
   }
-  console.log(cars);
+
+  const skeletonPulses = Array.from({ length: 2 })
+
+  useEffect(() => {
+    refetchCars()
+  }, [])
 
   return (
     <>
@@ -27,7 +33,7 @@ const Cars = () => {
         open={open}
         setOpen={setOpen}
       />
-      <div className="w-full">
+      <div className="w-full min-h-screen">
         <div className='p-8 text-[32px] text-center font-semibold'>
           Cars
         </div>
@@ -44,7 +50,7 @@ const Cars = () => {
             />
           </div>
         </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pt-[20px] gap-2 items-center justify-center'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pt-12 gap-2 items-center justify-center'>
           <div className="h-300px bg-white shadow-xl rounded-xl flex flex-col items-center justify-center  max-w-[300px] p-8 h-48"
             onClick={onAddCarClick}
           >
@@ -66,12 +72,22 @@ const Cars = () => {
               Add New Car
             </div>
           </div>
-          {cars?.map((car) => (
-            <CarCard
-              setOpen={setOpen}
-              car={car}
-            />
-          ))}
+          {isGetCarsLoading ? (
+            <React.Fragment>
+              {skeletonPulses.map((_, index) => (
+                <CarCardLoading key={index} />
+              ))}
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              {cars?.map((car) => (
+                <CarCard
+                  setOpen={setOpen}
+                  car={car}
+                />
+              ))}
+            </React.Fragment>
+          )}
         </div>
       </div>
     </>
