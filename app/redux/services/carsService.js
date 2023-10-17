@@ -1,6 +1,5 @@
 import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
-    arrayUnion,
     collection,
     doc,
     deleteDoc,

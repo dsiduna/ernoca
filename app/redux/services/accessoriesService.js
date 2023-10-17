@@ -18,14 +18,11 @@ export const accessoriesService = createApi({
         addAccessory: builder.mutation({
             async queryFn(accessory) {
                 const accessoryData = {
-                    /*make: car.make,
-                    model: car.model,
-                    description: car.description,
-                    price: car.price,
-                    year: car.year,
-                    colour: car.colour,
-                    phone: car.phone,
-                    mileage: car.mileage,*/
+                    brand: accessory.make,
+                    name: accessory.model,
+                    category: accessory.category,
+                    specs: accessory.description,
+                    price: accessory.price,
                     images: [],
                 };
                 try {
@@ -41,9 +38,10 @@ export const accessoriesService = createApi({
                         accessoryData.images.push(imageUrl);
                     }
                     await setDoc(accessoryRef, accessoryData);
-                    console.log('Product added successfully!');
+                    return { data: 'Accessory successfully added' }
                 } catch (error) {
                     console.error('Error adding product:', error);
+                    return error
                 }
             }
         }),
@@ -79,6 +77,37 @@ export const accessoriesService = createApi({
                     console.log(error)
                 }
             }
+        }),
+        updateAccessory: builder.mutation({
+            async queryFn(accessory) {
+                const imagesToBeUploaded = accessory?.pictures?.filter((item) => typeof item !== 'string');
+                const unDeletedImages = accessory.pictures?.filter((item) => typeof item === 'string');
+                const accessoryData = {
+                    brand: accessory.make,
+                    name: accessory.model,
+                    category: accessory.category,
+                    specs: accessory.description,
+                    price: accessory.price,
+                    images: unDeletedImages,
+                };
+
+                try {
+                    const accessoryRef = doc(collection(db, 'accessories'));
+                    const storage = getStorage();
+                    const storageRef = ref(storage);
+                    for (let i = 0; i < imagesToBeUploaded.length; i++) {
+                        const image = imagesToBeUploaded[i];
+                        const imageRef = ref(storageRef, `${car.id}/${image.name}`);
+                        await uploadBytes(imageRef, image);
+                        const imageUrl = await getDownloadURL(imageRef);
+                        carData.images.push(imageUrl);
+                    }
+                    await updateDoc(accessoryRef, accessoryData);
+                    console.log('Product updated successfully!');
+                } catch (error) {
+                    console.error('Error updating product:', error);
+                }
+            }
         })
     })
 })
@@ -88,4 +117,7 @@ export const {
     useDeleteAccessoryMutation,
     useGetAccessoriesMutation,
     useGetSingleAccessoryMutation,
+    useUpdateAccessoryMutation,
 } = accessoriesService;
+
+
