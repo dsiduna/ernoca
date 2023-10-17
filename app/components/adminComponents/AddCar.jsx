@@ -2,20 +2,18 @@
 
 import React, { useState, useRef } from 'react';
 import addIcon from '../../assets/add.svg';
-import InputField from '../InputField';
 import Image from 'next/image';
-import YearPicker from '../YearPicker';
 import AlertAtom from '../AlertAtom';
-
-import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import loader from '../../assets/loading.gif';
 import { updateModal } from '../../redux/actions/modals';
 import { useDispatch } from 'react-redux';
 
+import CarInput from './CarInput'
+
 import { useAddCarMutation } from '../../redux/services/carsService';
 
-const PictureItem = React.memo(({ pictureUrl, alt, onRemove }) => (
+export const PictureItem = React.memo(({ pictureUrl, alt, onRemove }) => (
     <div className="relative">
         <Image
             src={pictureUrl}
@@ -61,22 +59,6 @@ const AddCar = () => {
 
     const fileInputRef = useRef(null);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setCarData((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
-        handleClearErrors();
-    };
-
-    const handleYearChange = (e) => {
-        setCarData((prevState) => ({
-            ...prevState,
-            year: e.target.value,
-        }))
-    }
-
     const handleAddPictureClick = () => {
         fileInputRef.current.click();
     };
@@ -106,13 +88,6 @@ const AddCar = () => {
             pictures: '', // Clear the error message after successful upload
         }));
     };
-
-    const handlePhoneChange = (phone) => {
-        setCarData((prevState) => ({
-            ...prevState,
-            phone: phone,
-        }))
-    }
 
     const handleRemovePicture = (index) => {
         setCarData((prevState) => {
@@ -197,7 +172,7 @@ const AddCar = () => {
             console.log(error);
         }
     };
-
+console.log(carData)
 
     return (
         <div className="container mx-auto overflow-hidden">
@@ -208,82 +183,14 @@ const AddCar = () => {
             />
             }
             <div className="flex flex-col justify-center items-center w-full h-[400px] overflow-y-auto">
-                <div className='flex justify-center items-center gap-2 w-full p-2 pt-52'>
-                    <InputField
-                        label="Make"
-                        id="make"
-                        name="make"
-                        value={carData.make}
-                        onChange={handleChange}
-                        error={errors.make}
-                    />
-                    <InputField
-                        label="Model"
-                        id="model"
-                        name="model"
-                        value={carData.model}
-                        onChange={handleChange}
-                        error={errors.model}
-                    />
-                </div>
-                <div className='flex justify-center items-center gap-2 w-full p-2'>
-                    <InputField
-                        label="Colour"
-                        id="colour"
-                        name="colour"
-                        value={carData.colour}
-                        onChange={handleChange}
-                        error={errors.colour}
-                    />
-                    <InputField
-                        label="Mileage"
-                        id="mileage"
-                        name="mileage"
-                        value={carData.mileage}
-                        onChange={handleChange}
-                        error={errors.mileage}
-                        type='number'
-                    />
-                </div>
-                <div className='flex justify-center items-center gap-2 w-full p-2'>
-                    <YearPicker
-                        selectedYear={carData.year}
-                        onChange={handleYearChange}
-                    />
-                    <InputField
-                        label="Price"
-                        id="price"
-                        name="price"
-                        value={carData.price}
-                        onChange={handleChange}
-                        error={errors.price}
-                        type='number'
-                    />
-                </div>
-                <div className="p-2 w-full">
-                    <label htmlFor="description" className="text-md font-medium">
-                        Description:
-                    </label>
-                    <textarea
-                        id="description"
-                        name="description"
-                        value={carData.description}
-                        onChange={handleChange}
-                        className="w-full border border-gray-300 rounded-md py-2 px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    ></textarea>
-                </div>
-                <div className='p-2 w-full gap-2'>
-                    <label htmlFor="phone" className="text-md font-medium">
-                        Seller WhatsApp No:
-                    </label>
-
-                    <PhoneInput
-                        inputStyle={{ width: '100%', marginBlock: '2px' }}
-                        country={'zw'}
-                        value={carData.phone}
-                        onChange={phone => handlePhoneChange(phone)}
-                    />
-                </div>
+                <CarInput
+                    carData={carData}
+                    isValid={isValid}
+                    errors={errors}
+                    setCarData={setCarData}
+                    setErrors={setErrors}
+                    setIsValid={setIsValid}
+                />
                 <div className="p-2 w-full">
                     <label htmlFor="pictures" className="text-md font-medium">
                         Pictures:

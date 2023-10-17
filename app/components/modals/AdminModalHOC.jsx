@@ -40,7 +40,7 @@ function AdminModalHOC({ open, setOpen }) {
                 <Modal
                     open={open}
                     setOpen={setOpen}
-                    size='w-[550px] h-[640px]'
+                    size='w-[550px] h-[580px]'
                     title='Car'
                     content={<ViewCar />}
                 />
@@ -50,9 +50,9 @@ function AdminModalHOC({ open, setOpen }) {
                 <Modal
                     open={open}
                     setOpen={setOpen}
-                    size='w-[550px] h-[640px]'
+                    size='w-[380px] h-[260px]'
                     title='Delete'
-                    content={<DeleteItem />}
+                    content={<DeleteItem  closeModal={()=> setOpen(false)}/>}
                 />
             );
         case 'Edit Item':
@@ -60,7 +60,7 @@ function AdminModalHOC({ open, setOpen }) {
                 <Modal
                     open={open}
                     setOpen={setOpen}
-                    size='w-[550px] h-[640px]'
+                    size='w-[550px] h-[540px]'
                     title='Edit'
                     content={<UpdateItem />}
                 />
