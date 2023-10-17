@@ -63,7 +63,7 @@ export const carsService = createApi({
                 const carsRef = collection(db, 'cars');
                 try {
                     const snapshot = await getDocs(carsRef);
-                    const cars = snapshot.docs.map((doc) => doc.data());
+                    const cars = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
                     console.log(cars);
                     return { data: cars };
                 } catch (error) {

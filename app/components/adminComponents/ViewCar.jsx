@@ -52,7 +52,7 @@ const ViewCar = () => {
                 <div className='flex justify-start items-center gap-2'>
                     <span className='font-semibold text-lg'>Seller:</span>
                     <span>
-                        {car.phone}
+                        +{car.phone}
                     </span>
                     <div className='cursor-pointer'>
                         <Link href={`https://wa.me/${car.phone}`} target='_blank'>

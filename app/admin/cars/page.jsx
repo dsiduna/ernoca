@@ -15,13 +15,11 @@ const Cars = () => {
 
   const { data: cars, isLoading: isGetCarsLoading } = useGetCarsQuery();
 
-
-
-
   const onAddCarClick = () => {
     dispatch(updateModal('Add Car'));
     setOpen(true);
   }
+  console.log(cars);
 
   return (
     <>
