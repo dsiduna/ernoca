@@ -27,7 +27,7 @@ function AccessoryCard({ accessory, setOpen = () => { } }) {
           <div className='relative flex flex-col min-w-0 break-words bg-white mb-6 shadow-xl rounded-lg'>
             <div className='px-6 flex flex-col'>
             </div>
-            <div className='text-center text-[#7f2d00] font-semibold text-[18px]'>
+            <div className='text-center text-[#7f2d00] font-semibold text-[18px] pb-2'>
               {accessory.name}
             </div>
             <div className='pb-8'>

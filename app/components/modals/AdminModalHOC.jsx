@@ -9,6 +9,7 @@ import ViewAccessory from "../adminComponents/ViewAccessory";
 import DeleteItem from '../adminComponents/DeleteItem';
 import UpdateItem from '../adminComponents/UpdateItem';
 import AddAccessory from '../adminComponents/AddAccessory';
+import UpdateAccessory from '../adminComponents/UpdateAccessory';
 
 function AdminModalHOC({ open, setOpen }) {
     const { data: menu } = useSelector((state) => state?.modal);
@@ -81,9 +82,19 @@ function AdminModalHOC({ open, setOpen }) {
                 <Modal
                     open={open}
                     setOpen={setOpen}
-                    size='w-[550px] h-[580px]'
+                    size='w-[480px] h-[520px]'
                     title='Accessory'
                     content={<ViewAccessory />}
+                />
+            );
+        case 'Update Accessory':
+            return (
+                <Modal
+                    open={open}
+                    setOpen={setOpen}
+                    size='w-[600px] h-[548px]'
+                    content={<UpdateAccessory />}
+                    title="Update Accessory"
                 />
             )
         default:

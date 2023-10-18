@@ -6,13 +6,14 @@ import {
     getDocs,
     setDoc,
     getDoc,
+    updateDoc,
 } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { db } from "../../../firebase";
 
 export const accessoriesService = createApi({
-    reducerPath: 'carsService',
+    reducerPath: 'accessoriesService',
     baseQuery: fakeBaseQuery(),
     endpoints: (builder) => ({
         addAccessory: builder.mutation({
@@ -92,15 +93,15 @@ export const accessoriesService = createApi({
                 };
 
                 try {
-                    const accessoryRef = doc(collection(db, 'accessories'));
+                    const accessoryRef = doc(db, 'accessories', accessory.id);
                     const storage = getStorage();
                     const storageRef = ref(storage);
                     for (let i = 0; i < imagesToBeUploaded.length; i++) {
                         const image = imagesToBeUploaded[i];
-                        const imageRef = ref(storageRef, `${car.id}/${image.name}`);
+                        const imageRef = ref(storageRef, `${accessory.id}/${image.name}`);
                         await uploadBytes(imageRef, image);
                         const imageUrl = await getDownloadURL(imageRef);
-                        carData.images.push(imageUrl);
+                        accessoryData.images.push(imageUrl);
                     }
                     await updateDoc(accessoryRef, accessoryData);
                     console.log('Product updated successfully!');

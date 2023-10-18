@@ -45,7 +45,6 @@ const AccessoriesInput = ({
             specs: '',
         })
     }
-    console.log(accessoryData);
     return (
         <div>
             <div className='flex justify-center items-center gap-2 w-full p-2 pt-52'>
