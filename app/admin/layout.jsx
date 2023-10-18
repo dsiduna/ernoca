@@ -41,6 +41,11 @@ export default function AdminLayout({ children }) {
                                         Accessories
                                     </div>
                                 </Link>
+                                <Link href="/admin/for-approvals">
+                                    <div className={`rounded-2xl py-2 px-4 ${pathname === '/admin/services' ? 'bg-gray-900 text-white' : 'hover:bg-gray-300'}`}>
+                                        Pending Approval
+                                    </div>
+                                </Link>
                                 <Link href="/admin/logout">
                                     <div className="rounded-2xl py-2 px-4 hover:bg-gray-300">
                                         Logout

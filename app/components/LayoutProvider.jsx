@@ -15,6 +15,7 @@ const LayoutProvider = ({
             {(pathname !== "/admin" &&
                 pathname !== "/admin/cars" &&
                 pathname !== "/admin/accessories" &&
+                pathname !== "/admin/for-approvals" &&
                 pathname !== "/admin/logout")
                 ? (
                     <>
