@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SearchBar from '../../components/Searchbar'
 import FilterDropdown from "../../components/FilterDropDown";
 import AdminModalHOC from '../../components/modals/AdminModalHOC';
@@ -13,6 +13,7 @@ import { sparePartsCategories } from "../../utils/sparePartsCategories";
 const Accessories = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
+  const modal = useSelector((state) => state.modal.data);
 
   const { data: accessories, isLoading: isGetAccessoriesLoading, refetch: refetchAssessories } = useGetAccessoriesQuery();
 
@@ -24,8 +25,10 @@ const Accessories = () => {
   const skeletonPulses = Array.from({ length: 2 })
 
   useEffect(() => {
-    refetchAssessories()
-  }, [])
+    if (modal === 'Congratulations') {
+      refetchAssessories();
+    }
+  }, [modal]);
 
   return (
     <>

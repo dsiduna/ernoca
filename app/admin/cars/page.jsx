@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SearchBar from '../../components/Searchbar'
 import FilterDropdown from "../../components/FilterDropDown";
 import AdminModalHOC from '../../components/modals/AdminModalHOC';
@@ -13,6 +13,7 @@ const Cars = () => {
   const options = ['Option 1', 'Option 2', 'Option 3'];
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
+  const modal = useSelector((state) => state.modal.data);
 
   const { data: cars, isLoading: isGetCarsLoading, refetch: refetchCars } = useGetCarsQuery();
 
@@ -24,8 +25,10 @@ const Cars = () => {
   const skeletonPulses = Array.from({ length: 2 })
 
   useEffect(() => {
-    refetchCars()
-  }, [])
+    if (modal === 'Congratulations') {
+      refetchCars()
+    }
+  }, [modal])
 
   return (
     <>
