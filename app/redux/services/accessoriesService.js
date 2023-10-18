@@ -18,11 +18,11 @@ export const accessoriesService = createApi({
         addAccessory: builder.mutation({
             async queryFn(accessory) {
                 const accessoryData = {
-                    brand: accessory.make,
-                    name: accessory.model,
+                    name: accessory.name,
                     category: accessory.category,
-                    specs: accessory.description,
+                    specs: accessory.specs,
                     price: accessory.price,
+                    phone: accessory.phone,
                     images: [],
                 };
                 try {
@@ -55,12 +55,12 @@ export const accessoriesService = createApi({
                 }
             }
         }),
-        getAccessories: builder.mutation({
+        getAccessories: builder.query({
             async queryFn() {
                 const accessoriesRef = collection(db, 'accessories');
                 try {
                     const snapshot = await getDocs(accessoriesRef);
-                    const accessories = snapshot.docs.map((doc) => doc.data());
+                    const accessories = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
                     return { data: accessories };
                 } catch (error) {
                     console.log(error);
@@ -83,11 +83,11 @@ export const accessoriesService = createApi({
                 const imagesToBeUploaded = accessory?.pictures?.filter((item) => typeof item !== 'string');
                 const unDeletedImages = accessory.pictures?.filter((item) => typeof item === 'string');
                 const accessoryData = {
-                    brand: accessory.make,
-                    name: accessory.model,
+                    name: accessory.name,
                     category: accessory.category,
-                    specs: accessory.description,
+                    specs: accessory.specs,
                     price: accessory.price,
+                    phone: accessory.phone,
                     images: unDeletedImages,
                 };
 
@@ -115,7 +115,7 @@ export const accessoriesService = createApi({
 export const {
     useAddAccessoryMutation,
     useDeleteAccessoryMutation,
-    useGetAccessoriesMutation,
+    useGetAccessoriesQuery,
     useGetSingleAccessoryMutation,
     useUpdateAccessoryMutation,
 } = accessoriesService;

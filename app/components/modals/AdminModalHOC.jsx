@@ -8,6 +8,7 @@ import ViewCar from '../adminComponents/ViewCar'
 import ViewAccessory from "../adminComponents/ViewAccessory";
 import DeleteItem from '../adminComponents/DeleteItem';
 import UpdateItem from '../adminComponents/UpdateItem';
+import AddAccessory from '../adminComponents/AddAccessory';
 
 function AdminModalHOC({ open, setOpen }) {
     const { data: menu } = useSelector((state) => state?.modal);
@@ -52,7 +53,7 @@ function AdminModalHOC({ open, setOpen }) {
                     setOpen={setOpen}
                     size='w-[380px] h-[220px]'
                     title='Delete'
-                    content={<DeleteItem  closeModal={()=> setOpen(false)}/>}
+                    content={<DeleteItem closeModal={() => setOpen(false)} />}
                 />
             );
         case 'Edit Item':
@@ -65,6 +66,26 @@ function AdminModalHOC({ open, setOpen }) {
                     content={<UpdateItem />}
                 />
             );
+        case 'Add Accessory':
+            return (
+                <Modal
+                    open={open}
+                    setOpen={setOpen}
+                    size='w-[600px] h-[548px]'
+                    content={<AddAccessory />}
+                    title="Add Accessory"
+                />
+            );
+        case 'View Accessory':
+            return (
+                <Modal
+                    open={open}
+                    setOpen={setOpen}
+                    size='w-[550px] h-[580px]'
+                    title='Accessory'
+                    content={<ViewAccessory />}
+                />
+            )
         default:
             break;
     }

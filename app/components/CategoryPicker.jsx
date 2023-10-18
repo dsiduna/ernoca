@@ -1,23 +1,21 @@
 import React from 'react';
 
-const YearPicker = ({ selectedYear, onChange }) => {
-    const currentYear = new Date().getFullYear();
-    const years = Array.from({ length: 30 }, (_, index) => currentYear - index);
+const CategoryPicker = ({ selectedCategory, categories = [], onChange }) => {
 
     return (
         <div className="flex flex-col w-full">
             <label htmlFor="year" className="text-md font-medium text-start">
-                Manufacture Year:
+                Product Category:
             </label>
             <select
                 id="year"
                 className="border border-gray-300 rounded px-2 py-2 mt-1"
-                value={selectedYear}
+                value={selectedCategory}
                 onChange={(e) => onChange(e)}
             >
-                {years.map((year) => (
-                    <option key={year} value={year}>
-                        {year}
+                {categories.map((category) => (
+                    <option key={category} value={category}>
+                        {category}
                     </option>
                 ))}
             </select>
@@ -25,4 +23,4 @@ const YearPicker = ({ selectedYear, onChange }) => {
     );
 };
 
-export default YearPicker;
+export default CategoryPicker;

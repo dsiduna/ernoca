@@ -1,16 +1,16 @@
 
 
-export const starePartsCategories = [
+export const sparePartsCategories = [
     'Engine Components',
-    'Transmission assembly',
-    'Suspension and Steering Components',
+    'Transmission',
+    'Suspension',
     'Brake System',
-    'Electrical Components',
+    'Electrical',
     'Cooling & Heating',
     'Exhaust',
     'Body and Interior',
-    'Filters and Fluids',
-    'tyres'
+    'Filters & Fluids',
+    'Tyres'
 ]
 
 
