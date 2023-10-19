@@ -19,7 +19,6 @@ export default function AdminLayout({ children }) {
         }
     }, [user]);
 
-    console.log(user);
     return (
         <>
             {(pathname === '/admin' || pathname === '/admin/logout') ? (
