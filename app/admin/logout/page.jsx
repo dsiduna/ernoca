@@ -2,15 +2,21 @@
 
 import React from 'react'
 import { useRouter } from 'next/navigation'
+import { UserAuth } from '../../components/context/AuthContext'
 
 function Logout() {
     const router = useRouter()
+    const { logOut } = UserAuth()
     const onCancel = () => {
         router.back()
     }
-    const onLogout = () => {
-        router.push('/')
-    }
+    const handleSignOut = async () => {
+        try {
+            await logOut();
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <div className='flex justify-center items-center h-[100vh]'>
             <div className='rounded-2xl p-4 shadow-2xl'>
@@ -18,7 +24,7 @@ function Logout() {
                     Are you sure you want to logout?
                 </div>
                 <div className='w-full flex gap-4 items-center justify-evenly pt-[40px] pb-[20px]'>
-                    <button onClick={onLogout} className='w-full bg-[#ff0000] hover:bg-[#ed7014] text-white rounded-2xl py-2'>
+                    <button onClick={handleSignOut} className='w-full bg-[#ff0000] hover:bg-[#ed7014] text-white rounded-2xl py-2'>
                         Yes, Logout
                     </button>
                     <button onClick={onCancel} className='w-full bg-gray-700 hover:bg-gray-900 text-white rounded-2xl py-2'>
