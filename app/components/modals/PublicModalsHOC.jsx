@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Modal from '../Modal';
 import Congratulations from '../adminComponents/Congratulations';
 import EnlistCar from "../publicModals/EnlistCar";
-import EnlistAccessory from "../publicModals/enlistAccessory";
+import EnlistAccessory from "../publicModals/EnlistAccessory";
 
 function PublicModalHOC({ open, setOpen }) {
     const { modal: menu } = useSelector((state) => state?.modal);
