@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import Image from "next/image";
 import { BsSearch } from "react-icons/bs";
 import logo from '../../assets/logo.png'
+import { sparePartsCategories } from '../../utils/sparePartsCategories'
 
 export default function NavBar() {
   const [selectedPerson, setSelectedPerson] = useState();
@@ -157,17 +158,7 @@ export default function NavBar() {
       {/* Category */}
 
       <div className="text-black w-full lg:flex hidden bg-white px-10  space-x-5">
-        {[
-          "Home Applience",
-          "Electronics",
-          "Smartphone & Accesories",
-          "Laptops & Computers",
-          "Mens Fashion",
-          "Womens Fashion",
-          "Kids Collection",
-          "Mens Grooming",
-          "Beauty",
-        ].map((e) => (
+        {sparePartsCategories.map((e) => (
           <p key={e} className="text-sm cursor-pointer hover:text-pink-500">
             {e}
           </p>
