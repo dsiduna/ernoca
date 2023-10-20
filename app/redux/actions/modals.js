@@ -14,7 +14,10 @@ const modalReducer = createSlice({
         },
         viewCar: (state, action) => {
             state.car = action.payload;
-        }
+        },
+        updatePublicModal: (state, action) => {
+            state.modal = action.payload;
+        },
     }
 
 })
@@ -23,7 +26,8 @@ const { actions, reducer } = modalReducer;
 
 export const {
     updateModal,
-    viewCar
+    viewCar,
+    updatePublicModal,
 } = actions;
 
 export default reducer;
