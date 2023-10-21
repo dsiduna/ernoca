@@ -19,13 +19,16 @@ import storage from "redux-persist/lib/storage";
 import rootReducer from "./rootReducer";
 import { carsService } from "../services/carsService";
 import { accessoriesService } from "../services/accessoriesService";
+import { pendingService } from "../services/pendingService";
 
 const persistConfig = {
     key: "ernoca",
     storage,
     whitelist: [
         "cars",
-        "accessories"
+        "accessories",
+        "pendingCars",
+        "pendingAccessories",
     ],
 };
 
@@ -41,7 +44,11 @@ export default function configureAppStore() {
   const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(carsService.middleware, accessoriesService.middleware),
+      getDefaultMiddleware().concat(
+        carsService.middleware, 
+        accessoriesService.middleware,
+        pendingService.middleware,
+        ),
   });
 
   const persistor = persistStore(store);
