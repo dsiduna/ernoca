@@ -78,7 +78,7 @@ const AccessoriesInput = ({
             </div>
             <div className="p-2 w-full">
                 <label htmlFor="description" className="text-md font-medium">
-                    Produc Specs:
+                    Product Specs:
                 </label>
                 <textarea
                     id="specs"

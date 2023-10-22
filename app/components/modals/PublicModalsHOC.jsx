@@ -2,7 +2,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Modal from '../Modal';
-import Congratulations from '../adminComponents/Congratulations';
+import Congratulations from '../publicModals/Congratulations';
 import EnlistCar from "../publicModals/EnlistCar";
 import EnlistAccessory from "../publicModals/EnlistAccessory";
 
