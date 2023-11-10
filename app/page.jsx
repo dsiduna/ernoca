@@ -3,6 +3,7 @@ import { Navigation, Pagination, Autoplay, A11y } from "swiper/modules";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useSwiper } from "swiper/react";
+import FilterComponent from '../app/components/FilterComponent'
 
 // Import Swiper styles
 import "swiper/css";
@@ -77,31 +78,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col">
-      <div className="w-full hidden md:flex  justify-center items-center">
-        <Swiper
-          className=""
-          // install Swiper modules
-          modules={[Navigation, Pagination, Autoplay, A11y]}
-          spaceBetween={5}
-          slidesPerView={1}
-          loop
-          autoplay
-          pagination={{ clickable: true }}
-        >
-          {/* <SlideNextButton /> */}
-          {banner.map((e, i) => (
-            <SwiperSlide key={i}>
-              <Image
-                //layout="fill"
-                width={1390}
-                height={350}
-                src={e}
-                alt=""
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+      <FilterComponent />
 
       {/* grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 m-5 sm:m-10">
