@@ -14,6 +14,7 @@ import { db } from "../../../firebase";
 
 export const carsService = createApi({
     baseQuery: fakeBaseQuery(),
+    reducerPath: 'carsService',
     endpoints: (builder) => ({
         addCar: builder.mutation({
             async queryFn(car) {
