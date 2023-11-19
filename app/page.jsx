@@ -3,33 +3,28 @@ import FilterComponent from '../app/components/FilterComponent'
 
 // Import Swiper styles
 import ItemCard from './components/ItemCard';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from "./redux/actions/cars";
-import Image from "next/image";
+import { useGetCarsQuery } from './redux/services/carsService';
+import { useGetAccessoriesQuery } from './redux/services/accessoriesService';
 
 
 export default function Home() {
-  const [data, setData] = useState();
+
+  const { data: cars, isLoading: isGetCarsLoading, refetch: refetchCars } = useGetCarsQuery();
+  const { data: accessories, isLoading: isGetAccessoriesLoading, refetch: refetchAssessories } = useGetAccessoriesQuery();
   const dispatch = useDispatch();
-  const loadData = async () => {
-    const res = await fetch("https://dummyjson.com/products");
-    const response = await res.json();
-    setData(response);
-    console.log('we here')
-  };
-  useEffect(() => {
-    loadData();
-  }, []);
+
 
   const productList = useSelector((state) => state?.cars?.value);
-  console.log(productList);
+
 
   useEffect(() => {
-    if (data) {
-      dispatch(fetchProduct(data.products));
+    if (cars) {
+      dispatch(fetchProduct(cars));
     }
-  }, [dispatch, data]);
+  }, [dispatch, cars]);
 
   return (
     <div className="flex flex-col">

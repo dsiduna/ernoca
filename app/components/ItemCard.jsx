@@ -9,7 +9,6 @@ export default function ItemCard(props) {
 
     const {
         id,
-        title,
         description,
         price,
         discountPercentage,
@@ -18,10 +17,11 @@ export default function ItemCard(props) {
         brand,
         category,
         thumbnail,
+        make,
+        model,
         images,
     } = props;
 
-    console.log(title);
 
     return (
         <div
@@ -46,12 +46,12 @@ export default function ItemCard(props) {
             </div>
 
             <div className="p-3">
-                <h1 className="text-xl font-base ">{title ?? "Item name"}</h1>
+                <h1 className="text-xl font-bold">{`${make} ${model || "Item name"}`}</h1>
                 <h1 className="text-sm line-clamp-2 py-1 font-base ">
                     {description ??
                         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam          incidunt ullam quos est voluptatem, hic necessitatibus nam corporis          dolor animi quod tenetur earum eligendi nemo suscipit sapiente modi          obcaecati illo quasi, omnis reiciendis accusamus consequuntur harum          tempora? Iste unde adipisci debitis molestiae ratione. Laudantium          cumque, molestiae eveniet aspernatur perspiciatis recusandae."}
                 </h1>
-                <h1 className="text-sm font-semibold flex flex-row text-blue-500">
+                {/*<h1 className="text-sm font-semibold flex flex-row text-blue-500">
                     {[...Array(Math.floor(rating))].map((e, i) => (
                         <svg
                             key={e}
@@ -68,20 +68,20 @@ export default function ItemCard(props) {
                         </svg>
                     ))}
                     <span className="text-yellow-600 pr-5 ">{rating} </span>( {154})
-                </h1>
+                    </h1>*/}
                 <div className="my-auto"></div>
 
-                <h1 className="text-2xl font-semibold py-2">
+                {/*<h1 className="text-2xl font-semibold py-2">
                     {/* ${e.price}{" "} */}${price}
-                    <span className="line-through text-base text-slate-500 font-normal px-3">
+                {/* <span className="line-through text-base text-slate-500 font-normal px-3">
                         {((price / 100) * 12.96 + price).toFixed(2)}
-                        {/* 879 */}
+                        {/* 879 
                     </span>
                     <span className=" text-base text-red-500 font-medium">
-                        {/* {(e.price + e.price * 0.36).toFixed(2)} */}
+                        {/* {(e.price + e.price * 0.36).toFixed(2)} 
                         {discountPercentage}%OFF
                     </span>
-                </h1>
+                </h1>*/}
 
                 <h1 className="text-sm text-slate-400">10% Off on Select Cards</h1>
                 <h1 className="text-xs text-slate-800 font-semibold">
