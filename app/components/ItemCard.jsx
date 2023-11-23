@@ -1,22 +1,18 @@
-// @ts-nocheck 
-
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import React from "react";
+import { formatCurrency } from '../utils/formatCurrency'
+import Link from "next/link";
+
 
 export default function ItemCard(props) {
-    const router = useRouter();
 
     const {
         id,
         description,
         price,
-        discountPercentage,
-        rating,
-        stock,
-        brand,
-        category,
-        thumbnail,
+        year,
+        mileage,
+        colour,
         make,
         model,
         images,
@@ -24,8 +20,9 @@ export default function ItemCard(props) {
 
 
     return (
+        <Link href={`/${id}`} target='_blank'>
         <div
-            onClick={() => router.push(`/product-details/${id}`)}
+            
             className="flex flex-col border hover:scale-105 bg-white hover:bg-slate-50 cursor-pointer  justify-center items-start    border-slate-100 "
         >
             <div className="h-64 w-full relative">
@@ -48,8 +45,7 @@ export default function ItemCard(props) {
             <div className="p-3">
                 <h1 className="text-xl font-bold">{`${make} ${model || "Item name"}`}</h1>
                 <h1 className="text-sm line-clamp-2 py-1 font-base ">
-                    {description ??
-                        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam          incidunt ullam quos est voluptatem, hic necessitatibus nam corporis          dolor animi quod tenetur earum eligendi nemo suscipit sapiente modi          obcaecati illo quasi, omnis reiciendis accusamus consequuntur harum          tempora? Iste unde adipisci debitis molestiae ratione. Laudantium          cumque, molestiae eveniet aspernatur perspiciatis recusandae."}
+                    {description ? description.slice(0, 100) : "Lorem ipsum dolor sit amet consectetur adipisicing elit..."}
                 </h1>
                 {/*<h1 className="text-sm font-semibold flex flex-row text-blue-500">
                     {[...Array(Math.floor(rating))].map((e, i) => (
@@ -72,7 +68,7 @@ export default function ItemCard(props) {
                 <div className="my-auto"></div>
 
                 {/*<h1 className="text-2xl font-semibold py-2">
-                    {/* ${e.price}{" "} */}${price}
+                    {/* ${e.price}{" "} */}{formatCurrency(price)}
                 {/* <span className="line-through text-base text-slate-500 font-normal px-3">
                         {((price / 100) * 12.96 + price).toFixed(2)}
                         {/* 879 
@@ -83,12 +79,13 @@ export default function ItemCard(props) {
                     </span>
                 </h1>*/}
 
-                <h1 className="text-sm text-slate-400">10% Off on Select Cards</h1>
+                <h1 className="text-sm text-slate-400">{colour}</h1>
                 <h1 className="text-xs text-slate-800 font-semibold">
-                    Delivery within 2 days
+                    Mnf: {year}, {mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} km.
                 </h1>
             </div>
         </div>
+        </Link>
     );
 }
 
