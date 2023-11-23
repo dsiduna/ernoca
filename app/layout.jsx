@@ -1,32 +1,21 @@
-'use client'
-import { ReactNode } from 'react';
 import './globals.css';
-import { Provider } from 'react-redux';
-import Head from 'next/head';
-import LayoutProvider from './components/LayoutProvider';
-import configurestore from './redux/store/configurestore';
-import { PersistGate } from 'redux-persist/integration/react';
-import { AuthContextProvider } from './components/context/AuthContext';
+import Providers from './components/Providers';
 
-const { store, persistor } = configurestore();
+export const metadata = {
+  title: 'Ernoca',
+  description: 'Your trusted Zimbabwean car and motor spares dealership. Let us trade, today.',
+}
+
 
 export default function RootLayout({
   children,
 }) {
   return (
     <html lang="en">
-      <Head>
-        <title>Ernoca</title>
-        <meta property="og:title" content="E-commerce application" key="title" />
-      </Head>
       <body>
-        <Provider store={store}>
-          <AuthContextProvider>
-            <LayoutProvider>
-              {children}
-            </LayoutProvider>
-          </AuthContextProvider>
-        </Provider>
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );
