@@ -2,6 +2,7 @@
 import React from 'react'
 import { db } from '../../firebase'
 import { collection, getDocs } from 'firebase/firestore';
+import ProductDisplay from './ProductDisplay';
 
 export async function generateStaticParams() {
     const carsRef = collection(db, 'cars');
@@ -21,7 +22,7 @@ export async function generateStaticParams() {
 
 const Product = () => {
     return (
-        <div>Product</div>
+        <ProductDisplay/>
     )
 }
 
