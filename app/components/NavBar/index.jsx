@@ -98,7 +98,6 @@ export default function NavBar() {
             </button>
           )}
           <div
-            //onClick={() => router.push(`/product-details/${id}`)}
             className="py-2 px-3 bg-[#32348e] text-white hover:bg-[#bb2433] focus:ring-1 focus:ring-pink-500"
           >
             <svg
@@ -159,7 +158,7 @@ export default function NavBar() {
 
       <div className="text-black w-full lg:flex hidden bg-white px-10  space-x-5">
         {sparePartsCategories.map((e) => (
-          <p key={e} className="text-sm cursor-pointer hover:text-pink-500">
+          <p key={e} className="text-sm cursor-pointer hover:text-red-600">
             {e}
           </p>
         ))}
