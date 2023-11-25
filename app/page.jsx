@@ -1,9 +1,7 @@
 'use client'
-import FilterComponent from '../app/components/FilterComponent'
-
-// Import Swiper styles
-import ItemCard from './components/ItemCard';
-import { useEffect } from "react";
+import FilterComponent from '../app/components/FilterComponent';
+import ItemCard, { ItemLoadingCard } from './components/ItemCard';
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from "./redux/actions/cars";
 import { useGetCarsQuery } from './redux/services/carsService';
@@ -18,6 +16,7 @@ export default function Home() {
 
 
   const productList = useSelector((state) => state?.cars?.value);
+  const skeletonPulses = Array.from({ length: 4 })
 
 
   useEffect(() => {
@@ -32,9 +31,19 @@ export default function Home() {
 
       {/* grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 m-5 sm:m-10">
-        {productList?.map((e) => (
-          <ItemCard key={e.id} {...e} />
-        ))}
+        {isGetCarsLoading ? (
+          <React.Fragment>
+            {skeletonPulses.map((_, index) => (
+              <ItemLoadingCard key={index} />
+            ))}
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            {productList?.map((e) => (
+              <ItemCard key={e.id} {...e} />
+            ))}
+          </React.Fragment>
+        )}
       </div>
     </div>
   );
