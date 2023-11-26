@@ -149,10 +149,10 @@ export const ItemLoadingCard = () => {
         <div className="p-4 border rounded bg-gray-200 animate-pulse">
             <div className="h-64 w-full bg-gray-300 rounded"></div>
             <div className="mt-4">
-                <div className="h-6 bg-gray-400 rounded"></div>
-                <div className="h-4 bg-gray-400 rounded mt-2"></div>
-                <div className="h-4 bg-gray-400 rounded mt-2"></div>
-                <div className="h-4 bg-gray-400 rounded mt-2"></div>
+                <div className="h-6 bg-gray-300 rounded"></div>
+                <div className="h-4 bg-gray-300 rounded mt-2"></div>
+                <div className="h-4 bg-gray-300 rounded mt-2"></div>
+                <div className="h-4 bg-gray-300 rounded mt-2"></div>
             </div>
         </div>
     );
