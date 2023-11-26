@@ -73,16 +73,26 @@ export const carsService = createApi({
                 }
             },
         }),
-        getSingleCar: builder.mutation({
+        getSingleCar: builder.query({
             async queryFn(id) {
                 const carRef = doc(db, 'cars', id)
+                const accessoriesRef = doc(db, 'accessories', id)
                 try {
-                    await getDoc(carRef)
+                    const snapshot = await getDoc(carRef);
+                    const accessorySnapshot = await getDoc(accessoriesRef);
+                    let product;
+                    if (snapshot.exists()) {
+                        product = snapshot.data();
+                    } else {
+                        product = accessorySnapshot.data()
+                    }
+                    return { data: product }
                 } catch (error) {
                     console.log(error)
                 }
             }
         }),
+
         updateCar: builder.mutation({
             async queryFn(car) {
                 const imagesToBeUploaded = car?.pictures?.filter((item) => typeof item !== 'string');
@@ -125,6 +135,6 @@ export const {
     useAddCarMutation,
     useDeleteCarMutation,
     useGetCarsQuery,
-    useGetSingleCarMutation,
+    useGetSingleCarQuery,
     useUpdateCarMutation,
 } = carsService;
