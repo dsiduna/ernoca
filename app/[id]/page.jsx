@@ -3,6 +3,7 @@ import React from 'react'
 import { db } from '../../firebase'
 import { collection, getDocs } from 'firebase/firestore';
 import ProductDisplay from './ProductDisplay';
+import { useParams } from 'next/navigation';
 
 export async function generateStaticParams() {
     const carsRef = collection(db, 'cars');
@@ -11,7 +12,7 @@ export async function generateStaticParams() {
     const carsSnapshot = await getDocs(carsRef);
     const accessoriesSnapshot = await getDocs(accessoriesRef);
     const cars = carsSnapshot.docs.map((doc) => ({ id: doc.id }));
-    const accessories = accessoriesSnapshot.docs.map((doc) => ({ id: doc.id}));
+    const accessories = accessoriesSnapshot.docs.map((doc) => ({ id: doc.id }));
 
     const Arr = [...cars, ...accessories]
 
@@ -21,8 +22,9 @@ export async function generateStaticParams() {
 }
 
 const Product = () => {
+    
     return (
-        <ProductDisplay/>
+        <ProductDisplay />
     )
 }
 
