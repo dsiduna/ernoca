@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { db } from '../../firebase'
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, getDoc, doc } from 'firebase/firestore';
 import ProductDisplay from './ProductDisplay';
 import { useParams } from 'next/navigation';
 
@@ -21,10 +21,44 @@ export async function generateStaticParams() {
     }))
 }
 
-const Product = () => {
-    
+export async function generateMetadata({ params, searchParams }, parent) {
+    const id = params.id
+    let productData;
+    const carRef = doc(db, 'cars', id);
+    const accessoryRef = doc(db, 'accessories', id);
+
+    const carSnapshot = await getDoc(carRef);
+    const accessorySnapshot = await getDoc(accessoryRef);
+
+    if (carSnapshot.exists()) {
+        productData = carSnapshot.data();
+    } else {
+        productData = accessorySnapshot.data();
+    }
+
+
+    const previousImages = parent.openGraph?.images || []
+
+    const {
+        name = '',
+        make = '',
+        model = '',
+        description = '',
+        images = [],
+    } = productData || {};
+    return {
+        title: name === '' ? (make + ' ' + model) : name,
+        description: description.slice(0, 95) + '...',
+        openGraph: {
+            images: [images[0], ...previousImages],
+        },
+    }
+}
+
+const Product = ({ params, searchParams }) => {
+
     return (
-        <ProductDisplay />
+        <ProductDisplay params={params} />
     )
 }
 
