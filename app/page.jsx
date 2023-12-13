@@ -26,7 +26,7 @@ export default function Home() {
   }, [dispatch, cars]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col pt-24">
       <FilterComponent />
 
       {/* grid */}
