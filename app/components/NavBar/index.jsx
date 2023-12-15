@@ -42,8 +42,8 @@ export default function NavBar() {
             onChange={(e) => handleOnChangeCombobox(e)}
           >
             <Combobox.Input
-              onChange={(event) => setQuery(event.target.value)}
-              className="w-full py-1 px-5  outline-none focus:ring-1 focus:ring-pink-500"
+              onChange={() => { }}
+              className="w-full py-1 px-5  outline-none focus:ring-1 focus:ring-[#bb2433]"
               placeholder="Search..."
               type="text"
               autoComplete="off"
@@ -98,7 +98,7 @@ export default function NavBar() {
             </button>
           )}
           <div
-            className="py-2 px-3 bg-[#32348e] text-white hover:bg-[#bb2433] focus:ring-1 focus:ring-pink-500"
+            className="py-2 px-3 bg-[#32348e] text-white hover:bg-[#bb2433] focus:ring-1 focus:ring-[#bb2433]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -156,13 +156,13 @@ export default function NavBar() {
       </div>
       {/* Category */}
 
-      <div className="text-black w-full lg:flex hidden bg-white px-10  space-x-5">
+      {/*<div className="text-black w-full lg:flex hidden bg-white px-10  space-x-5">
         {sparePartsCategories.map((e) => (
           <p key={e} className="text-sm cursor-pointer hover:text-red-600">
             {e}
           </p>
         ))}
-      </div>
+        </div>*/}
     </div>
   );
 }
