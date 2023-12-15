@@ -1,9 +1,15 @@
 'use client'
 import { useState, useEffect } from 'react';
+import { capitalizeFirstLetter } from '../../utils/CapitaliseFirstLetter';
 
-const FilterComponent = ({ cars, onFilter }) => {
-    const [make, setMake] = useState('');
-    const [maxPrice, setMaxPrice] = useState('');
+const FilterComponent = ({
+    cars,
+    makes = [],
+    onFilter,
+    onReset = () => { }
+}) => {
+    const [make, setMake] = useState(null);
+    const [maxPrice, setMaxPrice] = useState(100000);
     const [minYear, setMinYear] = useState(new Date().getFullYear() - 30);
     const [maxYear, setMaxYear] = useState(new Date().getFullYear());
     const [maximumYears, setMaximumYears] = useState([])
@@ -11,17 +17,16 @@ const FilterComponent = ({ cars, onFilter }) => {
     const currentYear = new Date().getFullYear();
     const minYears = Array.from({ length: 30 }, (_, index) => currentYear - index);
 
-    let maxYears = [];
-
     useEffect(() => {
         const filteredYears = minYears.filter((year) => year > minYear)
         setMaximumYears(filteredYears)
     }, [minYear])
 
-    console.log(maxYears)
     const handleFilter = () => {
         const filteredCars = cars.filter(car => {
-            if (make && car.make !== make) {
+            const carMake = car.make.trim().toLowerCase();
+
+            if (make && carMake !== make.trim().toLowerCase()) {
                 return false;
             }
             if (maxPrice && car.price > maxPrice) {
@@ -38,18 +43,43 @@ const FilterComponent = ({ cars, onFilter }) => {
 
         onFilter(filteredCars);
     };
-
+    const resetFilter = () => {
+        setMinYear(new Date().getFullYear() - 30);
+        setMaxYear(new Date().getFullYear());
+        setMaxPrice(100000);
+        setMake(makes[0]);
+        onReset();
+    }
     return (
         <div className='bg-gray-100 p-4 m-8 mt-2 text-slate-900 rounded-xl shadow-md'>
             <div className='font-semibold text-[20px]  pb-4'>Search for your dream car</div>
             <div className='grid grid-cols-3 gap-2 xs:grid-cols-1'>
                 <div className='flex justify-start gap-4 items-center w-full'>
                     <label className=''>Make:</label>
-                    <input type="text" className='w-full mr-8 rounded-md' value={make} onChange={(e) => setMake(e.target.value)} />
+                    <select
+                        id='make'
+                        className='border border-gray-300 rounded px-2 py-1 mt-1'
+                        value={make}
+                        onChange={(e) => setMake(e.target.value)}
+                    >
+                        {makes.map((make, index) => (
+                            <option key={index} value={make}>
+                                {capitalizeFirstLetter(make)}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className='w-full flex gap-4 justify-start items-center'>
                     <label className=''>Budget:</label>
-                    <input type="number" className='w-full mr-8 rounded-md' value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} />
+                    <input
+                        type="text"
+                        className='w-full mr-8 rounded-md py-1 pl-2'
+                        value={`$${maxPrice}`}
+                        onChange={(e) => {
+                            const numericValue = e.target.value.replace(/\D/g, '');
+                            setMaxPrice(numericValue);
+                        }}
+                    />
                 </div>
                 <div className='w-full flex gap-4 justify-center items-center xs:justify-start'>
                     <label className=''>Years:</label>
@@ -66,8 +96,9 @@ const FilterComponent = ({ cars, onFilter }) => {
                     />
                 </div>
             </div >
-            <div className='flex justify-center items-center pt-4'>
+            <div className='flex justify-center items-center gap-8 pt-4'>
                 <button className='rounded-lg bg-[#32348e] hover:bg-[#bb2433] text-white px-4 py-1' onClick={handleFilter}>Filter</button>
+                <button className='rounded-lg bg-[#32348e] hover:bg-[#bb2433] text-white px-4 py-1' onClick={resetFilter}>Reset</button>
             </div>
         </div>
     );
