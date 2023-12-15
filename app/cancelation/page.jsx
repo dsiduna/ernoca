@@ -8,7 +8,7 @@ const Cancelation = () => {
     return (
         <div className="p-4 xs:py-32 py-24 flex flex-col items-center justify-center">
             <h1 className="text-2xl font-bold mb-4 text-center">Cancellation Policy</h1>
-            <div className="w-full xs:w-1/2 whitespace-pre-wrap text-md">
+            <div className="xs:w-full w-1/2 whitespace-pre-wrap text-md">
                 <p className="mb-4">
                     Our cancellation policy outlines the terms and conditions for canceling a purchase or sale on Ernoca.
                 </p>

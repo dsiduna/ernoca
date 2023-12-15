@@ -48,9 +48,9 @@ const Terms = () => {
     Please review these Terms in their entirety for a complete understanding of your rights and obligations when using Ernoca. If you do not agree with any part of these Terms, please refrain from using the platform. Ernoca reserves the right to amend these terms of service without the issuance of any notification to the users of the platform.`;
 
     return (
-        <div className="p-4 xs:py-32 py-24 flex flex-col items-center justify-center">
+        <div className="p-4 py-32 xs:py-24 flex flex-col items-center justify-center">
             <h1 className="text-2xl font-bold mb-4 text-center">Terms and Conditions</h1>
-            <pre className="whitespace-pre-wrap w-full xs:w-1/2 text-md">{termsAndConditionsText}</pre>
+            <pre className="whitespace-pre-wrap xs:w-full w-1/2 text-md">{termsAndConditionsText}</pre>
         </div>
     )
 }
