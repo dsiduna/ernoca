@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import { useContext, createContext, useState, useEffect } from "react";
 import {
     signInWithPopup,
@@ -14,19 +16,40 @@ export const AuthContextProvider = ({ children }) => {
 
     const googleSignIn = () => {
         const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider);
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const { user } = result;
+                if (isUserAllowed(user)) {
+                    setUser(user);
+                } else {
+                    // User is not allowed, sign out
+                    signOut(auth);
+                }
+            })
+            .catch((error) => {
+                console.log("Error signing in with Google:", error);
+            });
     };
 
     const logOut = () => {
         signOut(auth);
     };
 
+    const isUserAllowed = (user) => {
+        const allowedEmails = ["tonhodzaicollins@gmail.com", "denis.siduna@gmail.com"];
+        return allowedEmails.includes(user.email);
+    };
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
+            if (currentUser && isUserAllowed(currentUser)) {
+                setUser(currentUser);
+            } else {
+                setUser(null);
+            }
         });
         return () => unsubscribe();
-    }, [user]);
+    }, []);
 
     return (
         <AuthContext.Provider value={{ user, googleSignIn, logOut }}>
