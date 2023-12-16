@@ -39,8 +39,9 @@ const Seller = () => {
                     >
                         Vehicle
                     </div>
-                    <div className='rounded-xl bg-[#201c78] hover:bg-[#464686] text-white text-[24px] text-center px-4 py-1 cursor-pointer'
-                        onClick={handleSparesSelect}
+                    <div className='rounded-xl /*bg-[#201c78] hover:bg-[#464686]*/ bg-slate-400 text-white text-[24px] text-center px-4 py-1 cursor-pointer'
+                        /*onClick={handleSparesSelect}*/
+                        onClick={() => { }}
                     >
                         Spares
                     </div>
