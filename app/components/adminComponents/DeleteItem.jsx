@@ -27,7 +27,7 @@ const DeleteItem = ({ closeModal = () => { } }) => {
       console.log(error);
     }
   };
-  const carTitle = make + '' + model
+  const carTitle = make + ' ' + model
   return (
     <div className='flex flex-col items-center'>
       <div className='text-lg font-semibold w-2/3 text-center pt-8'>

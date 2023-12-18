@@ -6,10 +6,12 @@ import AddCar from '../adminComponents/AddCar'
 import Congratulations from '../adminComponents/Congratulations'
 import ViewCar from '../adminComponents/ViewCar'
 import ViewAccessory from "../adminComponents/ViewAccessory";
+import ViewPendingCar from '../adminComponents/ViewPendingCar'
 import DeleteItem from '../adminComponents/DeleteItem';
 import UpdateItem from '../adminComponents/UpdateItem';
 import AddAccessory from '../adminComponents/AddAccessory';
 import UpdateAccessory from '../adminComponents/UpdateAccessory';
+import ApproveItem from '../adminComponents/ApproveItem'
 
 function AdminModalHOC({ open, setOpen }) {
     const { data: menu } = useSelector((state) => state?.modal);
@@ -47,6 +49,16 @@ function AdminModalHOC({ open, setOpen }) {
                     content={<ViewCar />}
                 />
             );
+        case 'View Pending Car':
+            return (
+                <Modal
+                    open={open}
+                    setOpen={setOpen}
+                    size='w-[550px] h-[580px]'
+                    title='Pending'
+                    content={<ViewPendingCar />}
+                />
+            );
         case 'Delete Item':
             return (
                 <Modal
@@ -65,6 +77,16 @@ function AdminModalHOC({ open, setOpen }) {
                     size='w-[550px] h-[540px]'
                     title='Edit'
                     content={<UpdateItem />}
+                />
+            );
+        case 'Approve Item':
+            return (
+                <Modal
+                    open={open}
+                    setOpen={setOpen}
+                    size='w-[380px] h-[220px]'
+                    title='Edit'
+                    content={<ApproveItem closeModal={() => setOpen(false)} />}
                 />
             );
         case 'Add Accessory':

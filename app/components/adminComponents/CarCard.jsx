@@ -8,7 +8,7 @@ import { viewCar, updateModal } from '../../redux/actions/modals';
 
 
 
-const CarCard = ({ car, setOpen = () => { } }) => {
+const CarCard = ({ car, setOpen = () => { }, modal }) => {
     const dispatch = useDispatch();
     const settings = {
         dots: true,
@@ -19,7 +19,7 @@ const CarCard = ({ car, setOpen = () => { } }) => {
     };
     const onView = () => {
         dispatch(viewCar(car));
-        dispatch(updateModal('View Car'))
+        dispatch(updateModal(modal))
         setOpen(true);
     }
     return (

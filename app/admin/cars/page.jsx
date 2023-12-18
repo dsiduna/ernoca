@@ -87,6 +87,7 @@ const Cars = () => {
                 <CarCard
                   setOpen={setOpen}
                   car={car}
+                  modal='View Car'
                 />
               ))}
             </React.Fragment>
