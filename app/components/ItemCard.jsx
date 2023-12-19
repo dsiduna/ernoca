@@ -16,6 +16,10 @@ export default function ItemCard(props) {
         make,
         model,
         images,
+        transmission,
+        fuel,
+        condition,
+        location,
     } = props;
 
 
@@ -23,7 +27,7 @@ export default function ItemCard(props) {
         <Link href={`/${id}`} target='_blank'>
             <div
 
-                className="flex flex-col border hover:scale-105 bg-white hover:bg-slate-50 cursor-pointer  justify-center items-start    border-slate-100 "
+                className="flex flex-col h-full border hover:scale-105 bg-white hover:bg-slate-50 cursor-pointer  justify-start items-start border-slate-100 "
             >
                 <div className="h-64 w-full relative">
                     <Image
@@ -45,7 +49,7 @@ export default function ItemCard(props) {
                 <div className="p-3">
                     <h1 className="text-xl font-bold">{`${make} ${model || "Item name"}`}</h1>
                     <h1 className="text-sm line-clamp-2 py-1 font-base ">
-                        {description ? description.slice(0, 100) : "Lorem ipsum dolor sit amet consectetur adipisicing elit..."}
+                        {condition ? condition : 'Pre-owned'}, {transmission ? transmission : 'Automatic'} {fuel} Engine Car
                     </h1>
 
                     <div className="my-auto"></div>
@@ -54,8 +58,28 @@ export default function ItemCard(props) {
                     {/* ${e.price}{" "} */}{formatCurrency(price)}
                     <h1 className="text-sm text-slate-400">{colour}</h1>
                     <h1 className="text-xs text-slate-800 font-semibold">
-                        Mnf: {year}, {mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} km.
+                        Mnf: {year}, Mileage: {mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} km.
                     </h1>
+                    {location &&
+                        <div className="flex items-center justify-center text-slate-400 pt-2 gap-1">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                width={18}
+                                height={18}
+                                color='#94a3b8'
+                            >
+                                <path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602"
+                                />
+                            </svg>
+                            <span className="text-sm text-slate-400">
+
+                                {location}
+                            </span>
+                        </div>
+                    }
                 </div>
             </div>
         </Link>
