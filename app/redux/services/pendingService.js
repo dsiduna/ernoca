@@ -26,6 +26,10 @@ export const pendingService = createApi({
                     colour: car.colour,
                     phone: car.phone,
                     mileage: car.mileage,
+                    condition: car.condition,
+                    location: car.location,
+                    fuel: car.fuel,
+                    transmission: car.transmission,
                 };
                 try {
                     const carRef = doc(collection(db, 'pendingCars'));

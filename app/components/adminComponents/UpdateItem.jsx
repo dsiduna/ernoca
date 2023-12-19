@@ -27,6 +27,10 @@ const UpdateItem = () => {
     phone = '',
     mileage = 0,
     images = [],
+    condition,
+    location,
+    fuel,
+    transmission
   } = useSelector((state) => state.modal.car)
 
   const [updateCar, { isLoading: isUpdateCarLoading }] = useUpdateCarMutation();
@@ -41,6 +45,10 @@ const UpdateItem = () => {
     phone: phone,
     mileage: mileage,
     pictures: images,
+    condition: condition,
+    location: location,
+    fuel: fuel,
+    transmission: transmission,
   }
   const [carData, setCarData] = useState(initialState);
   const [isValid, setIsValid] = useState(true);
@@ -52,6 +60,13 @@ const UpdateItem = () => {
     colour: '',
     description: '',
   });
+
+  const setLocation = (location) => {
+    setCarData((prevCarData) => ({
+      ...prevCarData,
+      location: location
+    }));
+  };
 
   const fileInputRef = useRef(null);
 
@@ -182,6 +197,7 @@ const UpdateItem = () => {
           setCarData={setCarData}
           setErrors={setErrors}
           setIsValid={setIsValid}
+          setLocation={setLocation}
         />
         <div className="p-2 w-full">
           <label htmlFor="pictures" className="text-md font-medium">

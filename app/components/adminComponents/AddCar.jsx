@@ -45,6 +45,10 @@ const AddCar = () => {
         phone: '',
         mileage: 0,
         pictures: [],
+        condition: 'Pre-owned',
+        location: '',
+        fuel: 'Petrol',
+        transmission: 'Automatic'
     }
     const [carData, setCarData] = useState(initialState);
     const [isValid, setIsValid] = useState(true);
@@ -59,6 +63,13 @@ const AddCar = () => {
     });
 
     const fileInputRef = useRef(null);
+
+    const setLocation = (location) => {
+        setCarData((prevCarData) => ({
+            ...prevCarData,
+            location: location
+        }));
+    };
 
     const handleAddPictureClick = () => {
         fileInputRef.current.click();
@@ -193,6 +204,7 @@ const AddCar = () => {
                     setCarData={setCarData}
                     setErrors={setErrors}
                     setIsValid={setIsValid}
+                    setLocation={setLocation}
                 />
                 <div className="p-2 w-full">
                     <label htmlFor="pictures" className="text-md font-medium">
