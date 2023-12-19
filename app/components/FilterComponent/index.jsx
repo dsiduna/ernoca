@@ -140,6 +140,7 @@ const FilterComponent = ({
                     <label>Location:</label>
                     <CitySuggestInput
                         location={filters.location}
+                        towns={towns}
                         setLocation={setLocation}
                     />
                 </div>
@@ -192,7 +193,7 @@ const YearPicker = ({ selectedYear, onChange, years, name }) => {
 
 
 
-const CitySuggestInput = ({ location, setLocation = () => { } }) => {
+export const CitySuggestInput = ({ location, towns, setLocation = () => { } }) => {
     const [value, setValue] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
@@ -236,7 +237,7 @@ const CitySuggestInput = ({ location, setLocation = () => { } }) => {
                 value={value}
                 onChange={handleChange}
                 placeholder="Car Location"
-                className='w-full mr-8 rounded-md py-1 pl-2'
+                className='w-full mr-8 rounded-md py-1 pl-2 border border-gray-300'
             />
             {isOpen && (
                 <ul className="absolute z-10 bg-white mt-2 py-1 rounded-md shadow-lg">

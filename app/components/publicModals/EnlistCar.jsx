@@ -26,6 +26,10 @@ const EnlistCar = () => {
     phone: '',
     mileage: 0,
     pictures: [],
+    condition: 'Pre-owned',
+    location: '',
+    fuel: 'Petrol',
+    transmission: 'Automatic'
   }
   const [carData, setCarData] = useState(initialState);
   const [isValid, setIsValid] = useState(true);
@@ -38,6 +42,13 @@ const EnlistCar = () => {
     description: '',
     pictures: '',
   });
+
+  const setLocation = (location) => {
+    setCarData((prevCarData) => ({
+      ...prevCarData,
+      location: location
+    }));
+  };
 
   const fileInputRef = useRef(null);
 
@@ -157,7 +168,6 @@ const EnlistCar = () => {
       console.log(error);
     }
   };
-
   return (
     <div className="container mx-auto overflow-hidden">
       {!isValid && <AlertAtom
@@ -174,6 +184,7 @@ const EnlistCar = () => {
           setCarData={setCarData}
           setErrors={setErrors}
           setIsValid={setIsValid}
+          setLocation={setLocation}
         />
         <div className="p-2 w-full">
           <label htmlFor="pictures" className="text-md font-medium">

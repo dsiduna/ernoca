@@ -3,8 +3,11 @@
 import React from 'react';
 import InputField from '../InputField';
 import YearPicker from '../YearPicker';
+import { CitySuggestInput } from '../FilterComponent';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import { conditions, transmission, fuel } from '../../utils/conditions';
+import { towns } from '../../utils/towns';
 
 const CarInput = ({
     carData,
@@ -13,6 +16,7 @@ const CarInput = ({
     setCarData = () => { },
     setErrors = () => { },
     setIsValid = () => { },
+    setLocation = () => { }
 }) => {
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -47,10 +51,9 @@ const CarInput = ({
             description: '',
         })
     }
-
     return (
         <div>
-            <div className='flex justify-center items-center gap-2 w-full p-2 pt-52'>
+            <div className='flex justify-center items-center gap-2 w-full p-2 pt-96'>
                 <InputField
                     label="Make"
                     id="make"
@@ -86,7 +89,7 @@ const CarInput = ({
                     error={errors.mileage}
                     type='number'
                     inputMode='numeric'
-                    
+
                 />
             </div>
             <div className='flex justify-center items-center gap-2 w-full p-2'>
@@ -103,6 +106,73 @@ const CarInput = ({
                     error={errors.price}
                     type='number'
                 />
+            </div>
+            <div className='flex justify-center items-center gap-2 w-full p-2'>
+                <div className='w-full gap-1 flex flex-col'>
+                    <label htmlFor='location' className="text-md font-medium text-start">
+                        Car Location:
+                    </label>
+                    <CitySuggestInput
+                        towns={towns}
+                        setLocation={setLocation}
+                    />
+                </div>
+                <div className='w-full gap-1 flex flex-col'>
+                    <label className="text-md font-medium text-start">
+                        Condition:
+                    </label>
+                    <select
+                        id="condition"
+                        name="condition"
+                        className="border border-gray-300 rounded px-2 py-1"
+                        value={carData.condition}
+                        onChange={handleChange}
+                    >
+                        {conditions.map((condition, index) => (
+                            <option key={index} value={condition}>
+                                {condition}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+            </div>
+            <div className='flex justify-center items-center gap-2 w-full p-2'>
+                <div className='w-full gap-1 flex flex-col'>
+                    <label className="text-md font-medium text-start">
+                        Fuel:
+                    </label>
+                    <select
+                        id="fuel"
+                        name="fuel"
+                        className="border border-gray-300 rounded p-2"
+                        value={carData.fuel}
+                        onChange={handleChange}
+                    >
+                        {fuel.map((item, index) => (
+                            <option key={index} value={item}>
+                                {item}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className='w-full gap-1 flex flex-col'>
+                    <label className="text-md font-medium text-start">
+                        Transmission:
+                    </label>
+                    <select
+                        id="transmission"
+                        name="transmission"
+                        className="border border-gray-300 rounded p-2"
+                        value={carData.transmission}
+                        onChange={handleChange}
+                    >
+                        {transmission.map((mode, index) => (
+                            <option key={index} value={mode}>
+                                {mode}
+                            </option>
+                        ))}
+                    </select>
+                </div>
             </div>
             <div className="p-2 w-full">
                 <label htmlFor="description" className="text-md font-medium">
