@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { capitalizeFirstLetter } from '../../utils/CapitaliseFirstLetter';
-import { conditions } from '../../utils/conditions';
+import { conditions, fuel, transmission } from '../../utils/conditions';
 import { towns } from '../../utils/towns';
 
 
@@ -77,79 +77,120 @@ const FilterComponent = ({
     return (
         <div className="bg-gray-100 p-4 m-8 mt-2 text-slate-900 rounded-xl shadow-md">
             <div className="font-semibold text-[20px] pb-4">Search for your dream car</div>
-            <div className="grid grid-cols-3 gap-2 xs:grid-cols-1">
-                <div className="grid grid-cols-2 px-4 w-full">
-                    <label>Make:</label>
-                    <select
-                        id="make"
-                        name="make"
-                        className="border border-gray-300 rounded px-2 py-1 mt-1"
-                        value={filters.make}
-                        onChange={handleChange}
-                    >
-                        {makes.map((make, index) => (
-                            <option key={index} value={make}>
-                                {capitalizeFirstLetter(make)}
-                            </option>
-                        ))}
-                    </select>
+            <div className="grid grid-cols-4 gap-2 xs:grid-cols-1">
+                <div className='flex flex-col gap-2'>
+                    <div className="grid grid-cols-2 px-4 w-full items-center">
+                        <label>Make:</label>
+                        <select
+                            id="make"
+                            name="make"
+                            className="border border-gray-300 rounded px-2 py-1 mt-1"
+                            value={filters.make}
+                            onChange={handleChange}
+                        >
+                            {makes.map((make, index) => (
+                                <option key={index} value={make}>
+                                    {capitalizeFirstLetter(make)}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="grid grid-cols-2 w-full px-4 items-center">
+                        <label>Condition:</label>
+                        <select
+                            id="condition"
+                            name="condition"
+                            className="border border-gray-300 rounded px-2 py-1 mt-1"
+                            value={filters.condition}
+                            onChange={handleChange}
+                        >
+                            {conditions.map((condition, index) => (
+                                <option key={index} value={condition}>
+                                    {condition}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
-                <div className="w-full grid grid-cols-2 px-4">
-                    <label>Budget:</label>
-                    <input
-                        type="text"
-                        name="maxPrice"
-                        className="w-full mr-8 rounded-md py-1 pl-2"
-                        value={`$${filters.maxPrice}`}
-                        onChange={handleChange}
-                    />
+                <div className='flex flex-col gap-2'>
+                    <div className="grid grid-cols-2 w-full px-4 items-center">
+                        <label>Transmission:</label>
+                        <select
+                            id="condition"
+                            name="condition"
+                            className="border border-gray-300 rounded px-2 py-1 mt-1"
+                            value={filters.condition}
+                            onChange={handleChange}
+                        >
+                            {transmission.map((item, index) => (
+                                <option key={index} value={item}>
+                                    {item}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="grid grid-cols-2 w-full px-4 items-center">
+                        <label>Fuel:</label>
+                        <select
+                            id="condition"
+                            name="condition"
+                            className="border border-gray-300 rounded px-2 py-1 mt-1"
+                            value={filters.condition}
+                            onChange={handleChange}
+                        >
+                            {fuel.map((item, index) => (
+                                <option key={index} value={item}>
+                                    {item}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
-                <div className="w-full px-4 flex gap-4 justify-between items-center">
-                    <label>Year Made:</label>
-                    <YearPicker
-                        name="minYear"
-                        years={minYears.sort((a, b) => a - b)}
-                        selectedYear={filters.minYear}
-                        onChange={handleChange}
-                    />
-                    <div>to</div>
-                    <YearPicker
-                        name="maxYear"
-                        years={maximumYears.sort((a, b) => b - a)}
-                        selectedYear={filters.maxYear}
-                        onChange={handleChange}
-                    />
+                <div className='flex flex-col gap-2'>
+                    <div className="w-full grid grid-cols-2 px-4 items-center">
+                        <label>Budget:</label>
+                        <input
+                            type="text"
+                            name="maxPrice"
+                            className="w-full mr-8 rounded-md py-1 pl-2"
+                            value={`$${filters.maxPrice}`}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className=" grid grid-cols-2 px-4 items-center">
+                        <label>Location:</label>
+                        <CitySuggestInput
+                            location={filters.location}
+                            towns={towns}
+                            setLocation={setLocation}
+                        />
+                    </div>
                 </div>
-                <div className="grid grid-cols-2 w-full px-4">
-                    <label>Condition:</label>
-                    <select
-                        id="condition"
-                        name="condition"
-                        className="border border-gray-300 rounded px-2 py-1 mt-1"
-                        value={filters.condition}
-                        onChange={handleChange}
-                    >
-                        {conditions.map((condition, index) => (
-                            <option key={index} value={condition}>
-                                {condition}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div className=" grid grid-cols-2 px-4">
-                    <label>Location:</label>
-                    <CitySuggestInput
-                        location={filters.location}
-                        towns={towns}
-                        setLocation={setLocation}
-                    />
-                </div>
-                <div className="w-full flex px-4 gap-4 justify-between items-center">
-                    <label>Mileage:</label>
-                    <MileageRangeComponent
-                        initialMaxMileage={filters.maxMileage}
-                        initialMinMileage={filters.minMileage}
-                    />
+
+                <div className='flex flex-col gap-2'>
+                    <div className="w-full px-4 flex gap-4 justify-between items-center">
+                        <label>Mnf:</label>
+                        <YearPicker
+                            name="minYear"
+                            years={minYears.sort((a, b) => a - b)}
+                            selectedYear={filters.minYear}
+                            onChange={handleChange}
+                        />
+                        <div>to</div>
+                        <YearPicker
+                            name="maxYear"
+                            years={maximumYears.sort((a, b) => b - a)}
+                            selectedYear={filters.maxYear}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="w-full flex px-4 gap-4 justify-between items-center">
+                        <label>Mileage:</label>
+                        <MileageRangeComponent
+                            initialMaxMileage={filters.maxMileage}
+                            initialMinMileage={filters.minMileage}
+                        />
+                    </div>
                 </div>
             </div>
             <div className="flex justify-center items-center gap-8 pt-4">
@@ -294,12 +335,12 @@ const MileageRangeComponent = ({ initialMinMileage, initialMaxMileage, onRangeCh
     };
 
     return (
-        <div className='px-4 flex gap-4 justify-between items-center'>
+        <div className='flex gap-1 justify-between items-center'>
             <select
                 id="minMileage"
                 value={minMileage}
                 onChange={handleMinMileageChange}
-                className='py-1 px-2 rounded-md'
+                className='py-1 rounded-md'
             >
                 {renderMileageOptions()}
             </select>
@@ -308,7 +349,7 @@ const MileageRangeComponent = ({ initialMinMileage, initialMaxMileage, onRangeCh
                 id="maxMileage"
                 value={maxMileage}
                 onChange={handleMaxMileageChange}
-                className='py-1 px-2 rounded-md'
+                className='py-1 rounded-md'
             >
                 {renderMileageOptions()}
             </select>
