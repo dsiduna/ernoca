@@ -14,7 +14,7 @@ const initialState = {
     condition: [],
     transmission: [],
     fuel: [],
-    location: 'Harare',
+    location: null,
     minMileage: 0,
     maxMileage: 300000,
 };
@@ -46,7 +46,23 @@ const FilterComponent = ({
             }
 
             // Filter by max price
-            if (car.price > filters.maxPrice) {
+            if (filters.maxPrice && parseInt(car.price) > parseInt(filters.maxPrice)) {
+                return false;
+            }
+
+            // Filter by min mileage
+            if (
+                filters.minMileage &&
+                parseInt(car.mileage) < parseInt(filters.minMileage)
+            ) {
+                return false;
+            }
+
+            // Filter by max mileage
+            if (
+                filters.maxMileage &&
+                parseInt(car.mileage) > parseInt(filters.maxMileage)
+            ) {
                 return false;
             }
 
@@ -78,6 +94,11 @@ const FilterComponent = ({
 
             // Filter by fuel
             if (filters.fuel.length > 0 && !filters.fuel.includes(car.fuel)) {
+                return false;
+            }
+
+            //filter by location
+            if (filters.location && car.location !== filters.location) {
                 return false;
             }
 
