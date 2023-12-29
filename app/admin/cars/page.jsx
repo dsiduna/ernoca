@@ -29,7 +29,7 @@ const Cars = () => {
       refetchCars()
     }
   }, [modal])
-
+  
   return (
     <>
       <AdminModalHOC

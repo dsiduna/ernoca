@@ -8,6 +8,7 @@ import Image from "next/image";
 import { BsSearch } from "react-icons/bs";
 import logo from '../../assets/logo.png'
 import { sparePartsCategories } from '../../utils/sparePartsCategories'
+import SearchBar from '../Searchbar'
 
 export default function NavBar() {
   const [selectedPerson, setSelectedPerson] = useState();
@@ -36,87 +37,9 @@ export default function NavBar() {
         </Link>
 
         {/* Center bar */}
-        <div className="w-1/2 hidden  md:flex  border">
-          <Combobox
-            value={selectedPerson}
-            onChange={(e) => handleOnChangeCombobox(e)}
-          >
-            <Combobox.Input
-              onChange={() => { }}
-              className="w-full py-1 px-5  outline-none focus:ring-1 focus:ring-[#bb2433]"
-              placeholder="Search..."
-              type="text"
-              autoComplete="off"
-            />
-            <Combobox.Options className="absolute top-14 w-1/2 ">
-              {query === ""
-                ? productList?.id
-                : productList
-                  .filter((product) => {
-                    return product.title
-                      .toLowerCase()
-                      .includes(query.toLowerCase());
-                  })
-                  .splice(0, 8)
-                  .map((item) => (
-                    <Combobox.Option
-                      key={item.id}
-                      value={item.title}
-                      className={({ active }) =>
-                        `relative cursor-default select-none py-2 pl-10 pr-4 bg-white shadow-lg ${active
-                          ? "bg-red-200 text-red-900"
-                          : "text-gray-900"
-                        }`
-                      }
-                    >
-                      {item.title}
-                    </Combobox.Option>
-                  ))}
-            </Combobox.Options>
-          </Combobox>
-          {query === "" ? (
-            <></>
-          ) : (
-            <button
-              onClick={() => setSelectedPerson("")}
-              className="text-red-800 flex p-2 bg-white "
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          )}
-          <div
-            className="py-2 px-3 bg-[#32348e] text-white hover:bg-[#bb2433] focus:ring-1 focus:ring-[#bb2433]"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 "
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-              />
-            </svg>
-          </div>
+        <div className="w-1/2 hidden  md:flex ">
+          <SearchBar />
         </div>
-
         {/* Right Side Bar */}
         <div className="flex items-center space-x-8 ">
           {/* Cart */}

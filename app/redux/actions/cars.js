@@ -10,8 +10,6 @@ export const productSlice = createSlice({
     reducers: {
         fetchProduct: (state, action) => {
             state.value = action.payload;
-
-
         },
     },
 });
