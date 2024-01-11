@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { updatePublicModal } from '../redux/actions/modals';
-import PublicModalHOC from '../components/modals/PublicModalsHOC'
+import { updatePublicModal } from '../../redux/actions/modals';
+import PublicModalHOC from '../../components/modals/PublicModalsHOC'
 
 
 const Seller = () => {

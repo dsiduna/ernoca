@@ -2,9 +2,9 @@
 
 import Image from "next/image"
 import { useRouter } from 'next/navigation'
-import logo from "../assets/logo.png"
+import logo from "../../assets/logo.png"
 import React, { useState, useEffect } from "react"
-import { UserAuth } from '../components/context/AuthContext';
+import { UserAuth } from '../../components/context/AuthContext';
 
 export default function Admin() {
     const router = useRouter()

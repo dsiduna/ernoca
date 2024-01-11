@@ -1,10 +1,10 @@
 'use client'
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import AdminModalHOC from '../../components/modals/AdminModalHOC';
-import CarCard from "../../components/adminComponents/CarCard";
-import CarCardLoading from '../../components/adminComponents/CarCardLoading';
-import { useGetPendingCarsQuery } from "../../redux/services/pendingService";
+import AdminModalHOC from '../../../components/modals/AdminModalHOC';
+import CarCard from "../../../components/adminComponents/CarCard";
+import CarCardLoading from '../../../components/adminComponents/CarCardLoading';
+import { useGetPendingCarsQuery } from "../../../redux/services/pendingService";
 
 const ForApprovals = () => {
     const [open, setOpen] = useState(false);

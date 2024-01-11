@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { useGetSingleCarQuery } from '../redux/services/carsService'
-import { formatCurrency } from '../utils/formatCurrency'
+import { useGetSingleCarQuery } from '../../redux/services/carsService'
+import { formatCurrency } from '../../utils/formatCurrency'
 
 const ProductDisplay = ({ params, searchParams }) => {
   const { data: productData, isLoading: isGetProductLoading } = useGetSingleCarQuery(params.id);

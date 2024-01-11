@@ -1,13 +1,13 @@
 'use client'
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SearchBar from '../../components/Searchbar'
-import FilterDropdown from "../../components/FilterDropDown";
-import AdminModalHOC from '../../components/modals/AdminModalHOC';
-import { updateModal } from "../../redux/actions/modals";
-import { useGetCarsQuery } from "../../redux/services/carsService";
-import CarCard from "../../components/adminComponents/CarCard";
-import CarCardLoading from '../../components/adminComponents/CarCardLoading';
+import SearchBar from '../../../components/Searchbar'
+import FilterDropdown from "../../../components/FilterDropDown";
+import AdminModalHOC from '../../../components/modals/AdminModalHOC';
+import { updateModal } from "../../../redux/actions/modals";
+import { useGetCarsQuery } from "../../../redux/services/carsService";
+import CarCard from "../../../components/adminComponents/CarCard";
+import CarCardLoading from '../../../components/adminComponents/CarCardLoading';
 
 const Cars = () => {
   const options = ['Option 1', 'Option 2', 'Option 3'];
@@ -29,7 +29,7 @@ const Cars = () => {
       refetchCars()
     }
   }, [modal])
-  
+
   return (
     <>
       <AdminModalHOC

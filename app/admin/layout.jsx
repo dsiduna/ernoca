@@ -3,9 +3,9 @@ import { useMediaQuery } from 'react-responsive'
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import logo from '../assets/logo.png';
+import logo from '../../assets/logo.png';
 import Image from 'next/image';
-import { UserAuth } from '../components/context/AuthContext';
+import { UserAuth } from '../../components/context/AuthContext';
 
 export default function AdminLayout({ children }) {
     const pathname = usePathname();

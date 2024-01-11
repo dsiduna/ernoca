@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Title = () => {
+const Title = ({title}) => {
   return (
-    <div>Title</div>
+    <div>Showing search results for <span>{title}</span></div>
   )
 }
 

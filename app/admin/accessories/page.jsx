@@ -1,14 +1,14 @@
 'use client'
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SearchBar from '../../components/Searchbar'
-import FilterDropdown from "../../components/FilterDropDown";
-import AdminModalHOC from '../../components/modals/AdminModalHOC';
-import { updateModal } from "../../redux/actions/modals";
-import { useGetAccessoriesQuery } from "../../redux/services/accessoriesService";
-import AccessoryCard from '../../components/adminComponents/AccessoryCard'
-import CarCardLoading from '../../components/adminComponents/CarCardLoading';
-import { sparePartsCategories } from "../../utils/sparePartsCategories";
+import SearchBar from '../../../components/Searchbar'
+import FilterDropdown from "../../../components/FilterDropDown";
+import AdminModalHOC from '../../../components/modals/AdminModalHOC';
+import { updateModal } from "../../../redux/actions/modals";
+import { useGetAccessoriesQuery } from "../../../redux/services/accessoriesService";
+import AccessoryCard from '../../../components/adminComponents/AccessoryCard'
+import CarCardLoading from '../../../components/adminComponents/CarCardLoading';
+import { sparePartsCategories } from "../../../utils/sparePartsCategories";
 
 const Accessories = () => {
   const [open, setOpen] = useState(false);

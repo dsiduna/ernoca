@@ -1,11 +1,11 @@
 'use client'
-import FilterComponent from '../app/components/FilterComponent';
-import ItemCard, { ItemLoadingCard } from './components/ItemCard';
+import FilterComponent from '../components/FilterComponent';
+import ItemCard, { ItemLoadingCard } from '../components/ItemCard';
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProduct } from "./redux/actions/cars";
-import { useGetCarsQuery } from './redux/services/carsService';
-import { useGetAccessoriesQuery } from './redux/services/accessoriesService';
+import { fetchProduct } from "../redux/actions/cars";
+import { useGetCarsQuery } from '../redux/services/carsService';
+import { useGetAccessoriesQuery } from '../redux/services/accessoriesService';
 
 
 export default function Home() {

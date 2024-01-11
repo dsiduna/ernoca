@@ -10,7 +10,7 @@ import {
 } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-import { db } from "../../../firebase";
+import { db } from "../../firebase";
 
 export const carsService = createApi({
     baseQuery: fakeBaseQuery(),
@@ -76,6 +76,17 @@ export const carsService = createApi({
                     throw new Error(error.message);
                 }
             },
+        }),
+        searchCars: builder.query({
+            async queryFn(searchTerm) {
+                const carsRef = collection(db, 'cars')
+                try {
+
+                } catch (error) {
+                    console.log(error);
+                    throw new Error(error.message);
+                }
+            }
         }),
         getSingleCar: builder.query({
             async queryFn(id) {

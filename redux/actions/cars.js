@@ -11,11 +11,14 @@ export const productSlice = createSlice({
         fetchProduct: (state, action) => {
             state.value = action.payload;
         },
+        searchTerm: (state, action) => {
+            state.searchTerm = action.payload;
+        }
     },
 });
 
 const { actions, reducer } = productSlice
 
-export const { fetchProduct } = actions;
+export const { fetchProduct, searchTerm } = actions;
 export default reducer;
 

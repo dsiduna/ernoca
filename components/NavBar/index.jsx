@@ -3,24 +3,28 @@ import { Combobox } from "@headlessui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
 import { BsSearch } from "react-icons/bs";
 import logo from '../../assets/logo.png'
 import { sparePartsCategories } from '../../utils/sparePartsCategories'
 import SearchBar from '../Searchbar'
+import { searchTerm } from '../../redux/actions/cars'
 
 export default function NavBar() {
-  const [selectedPerson, setSelectedPerson] = useState();
-  const [query, setQuery] = useState("");
+  const [enteredSearchTerm, setEnteredSearchTerm] = useState('');
   const router = useRouter();
   const cartItems = useSelector((state) => state?.cart?.value);
   const productList = useSelector((state) => state?.productList?.value);
+  const dispatch = useDispatch()
 
-  const handleOnChangeCombobox = (e) => {
-    setSelectedPerson(e);
-    router.push(`/${e}`);
-  };
+  const onSearch = () => {
+    if (enteredSearchTerm !== '') {
+      dispatch(searchTerm(enteredSearchTerm))
+      router.push('/search');
+      setEnteredSearchTerm('')
+    }
+  }
 
   return (
     <div className="flex flex-col  fixed z-20 space-y-3 bg-white p-3 shadow-sm w-full ">
@@ -38,7 +42,11 @@ export default function NavBar() {
 
         {/* Center bar */}
         <div className="w-1/2 hidden  md:flex ">
-          <SearchBar />
+          <SearchBar
+            searchTerm={enteredSearchTerm}
+            setSearchTerm={setEnteredSearchTerm}
+            onSearch={onSearch}
+          />
         </div>
         {/* Right Side Bar */}
         <div className="flex items-center space-x-8 ">
