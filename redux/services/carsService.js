@@ -7,7 +7,12 @@ import {
     setDoc,
     getDoc,
     updateDoc,
+    query,
+    where,
 } from 'firebase/firestore';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { db } from "../../firebase";
@@ -77,10 +82,20 @@ export const carsService = createApi({
                 }
             },
         }),
-        searchCars: builder.query({
-            async queryFn(searchTerm) {
+        searchCars: builder.mutation({
+            async queryFn(resultsIDs) {
                 const carsRef = collection(db, 'cars')
+
                 try {
+                    const q = query(carsRef, where(firebase.firestore.FieldPath.documentId(), "in", resultsIDs));
+                    const querySnapshot = await getDocs(q);
+
+                    const cars = [];
+                    querySnapshot.forEach((doc) => {
+                        const dataWithId = { id: doc.id, ...doc.data() };
+                        cars.push(dataWithId);
+                    });
+                    return { data: cars };
 
                 } catch (error) {
                     console.log(error);
@@ -156,4 +171,5 @@ export const {
     useGetCarsQuery,
     useGetSingleCarQuery,
     useUpdateCarMutation,
+    useSearchCarsMutation,
 } = carsService;
