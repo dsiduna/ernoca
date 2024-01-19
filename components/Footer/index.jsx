@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="text-center lg:text-left border-t text-gray-600">
-      <div className="flex justify-center items-center lg:justify-between p-6 ">
+      <div className="flex justify-center items-center lg:justify-between p-6 py-2">
         <div className="mr-12 hidden lg:block">
           <span>Get connected with us on social networks:</span>
         </div>
@@ -64,9 +64,9 @@ export default function Footer() {
           </a>
         </div>
       </div>
-      <div className="mx-6 py-10 text-center md:text-left">
-        <div className="grid grid-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start justify-items-center">
-          <div className="">
+      <div className="mx-6 xs:mx-0 py-10 text-center md:text-left">
+        <div className="grid grid-cols-2 xs:grid-cols-1 lg:grid-cols-4 gap-8 items-start justify-end">
+          <div className='flex flex-col justify-center items-center'>
             <h6
               className="
             uppercase
@@ -111,13 +111,13 @@ export default function Footer() {
 
 
           {/* col-2 */}
-          <div className="">
+          <div className=" w-full flex flex-col items-center justify-center">
             <h6 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">
               Help
             </h6>
 
             {["Payment Issues", "Order Issues", "Report a product"].map((e) => (
-              <p className="mb-4 text-xl sm:text-base" key={e}>
+              <p className="mb-4 xs:mb-1 xs:text-md text-xl sm:text-base" key={e}>
                 <a href="#!" className="text-gray-600">
                   {e ?? "Footer Link"}
                 </a>
@@ -125,13 +125,13 @@ export default function Footer() {
             ))}
           </div>
           {/* col-1 */}
-          <div className="">
+          <div className=" w-full flex flex-col items-center justify-center">
             <h6 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">
               POLICY
             </h6>
 
             {footerLinks.map((link) => (
-              <p className="mb-4 text-xl sm:text-base" key={link.name}>
+              <p className="mb-4 xs:mb-1 xs:text-md text-xl sm:text-base" key={link.name}>
                 <Link href={link.link} target='_blank' className="text-gray-600">
                   {link.name ?? "Footer Link"}
                 </Link>
@@ -139,7 +139,7 @@ export default function Footer() {
             ))}
           </div>
           {/* col-3 */}
-          <div className="">
+          <div className=" w-full flex flex-col items-center justify-center">
             <h6 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">
               Contact
             </h6>
