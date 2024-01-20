@@ -10,7 +10,7 @@ export default function Footer() {
           <span>Get connected with us on social networks:</span>
         </div>
         <div className="flex justify-center">
-          <a href="#!" className="mr-6 text-gray-600 hover:text-gray-900">
+          <a href='https://www.facebook.com/Col1Ton' className="mr-6 text-gray-600 hover:text-gray-900">
             <svg
               aria-hidden="true"
               focusable="false"
@@ -101,9 +101,9 @@ export default function Footer() {
             </svg>
 
             <address>
-              1 Chancellor Ave,
+              Bulawayo Centre
               <br />
-              Harare,
+              Bulawayo,
               <br />
               Zimbabwe
             </address>
