@@ -3,6 +3,7 @@ import React from 'react'
 import { db } from '../../firebase'
 import { collection, getDocs, getDoc, doc } from 'firebase/firestore';
 import ProductDisplay from './ProductDisplay';
+import SuggestedCars from '../../components/SuggestedCars'
 import { useParams } from 'next/navigation';
 
 export async function generateStaticParams() {
@@ -58,7 +59,10 @@ export async function generateMetadata({ params, searchParams }, parent) {
 const Product = ({ params, searchParams }) => {
 
     return (
-        <ProductDisplay params={params} />
+        <>
+            <ProductDisplay params={params} />
+            <SuggestedCars />
+        </>
     )
 }
 

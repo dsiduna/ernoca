@@ -16,6 +16,7 @@ export default function NavBar() {
   const router = useRouter();
   const cartItems = useSelector((state) => state?.cart?.value);
   const productList = useSelector((state) => state?.productList?.value);
+  
   const dispatch = useDispatch()
 
   const onSearch = () => {
