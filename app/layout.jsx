@@ -2,7 +2,7 @@ import './globals.css';
 import Providers from '../components/Providers';
 
 export const metadata = {
-  title: 'Ernoca',
+  title: 'Ernoca - Exclusively the Best',
   description: 'Your trusted Zimbabwean car and motor spares dealership. Let us trade, today.',
 }
 
