@@ -35,7 +35,7 @@ export default function Home() {
     dispatch(fetchProduct(cars));
   }
   return (
-    <div className="flex flex-col pt-24">
+    <div className="flex flex-col pt-24 w-full">
       <FilterComponent
         cars={cars}
         makes={makes}
@@ -44,7 +44,7 @@ export default function Home() {
       />
 
       {/* grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 m-5 sm:m-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 m-4">
         {isGetCarsLoading ? (
           <React.Fragment>
             {skeletonPulses.map((_, index) => (

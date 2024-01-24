@@ -41,7 +41,7 @@ export default function NavBar() {
         </Link>
 
         {/* Center bar */}
-        <div className="w-1/2 hidden  md:flex ">
+        <div className="w-1/2 hidden lg:inline md:flex ">
           <SearchBar
             searchTerm={enteredSearchTerm}
             setSearchTerm={setEnteredSearchTerm}

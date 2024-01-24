@@ -134,7 +134,7 @@ const FilterComponent = ({
         }));
     };
     return (
-        <div className='my-4 px-8 xs:px-4 sm:px-4 xs:mx-auto w-full'>
+        <div className='my-4 px-8 xs:px-4 sm:px-4 w-full'>
             <div className="bg-gray-100 p-4 text-slate-900 rounded-xl shadow-md w-full flex flex-col items-center justify-center">
                 <div className="font-semibold text-[24px] sm:text-[16px] md:text-[20px] xs:text-[14px] text-center pb-4">Search for your dream car</div>
                 <div className="grid grid-cols-4 gap-2 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 w-full">
