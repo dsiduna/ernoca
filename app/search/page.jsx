@@ -46,7 +46,7 @@ const SearchPage = () => {
     }, [searchTerm])
 
     return (
-        <div className='py-20 px-8 lg:px-20'>
+        <div className='py-20 px-4 lg:px-20'>
             <Title title={searchTerm} />
             <Results
                 data={searchData}
