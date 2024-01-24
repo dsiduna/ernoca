@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { formatCurrency } from '../utils/formatCurrency'
 import Link from "next/link";
+import { capitalizeFirstLetter } from "../utils/CapitaliseFirstLetter";
 
 
 export default function ItemCard(props) {
@@ -47,7 +48,7 @@ export default function ItemCard(props) {
                 </div>
 
                 <div className="p-3">
-                    <h1 className="text-xl font-bold">{`${make} ${model || "Item name"}`}</h1>
+                    <h1 className="text-xl font-bold">{capitalizeFirstLetter(`${make} ${model || "Item name"}`)}</h1>
                     <h1 className="text-sm line-clamp-2 py-1 font-base ">
                         {condition ? condition : 'Pre-owned'}, {transmission ? transmission : 'Automatic'} {fuel} Engine Car
                     </h1>

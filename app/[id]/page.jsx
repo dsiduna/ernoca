@@ -56,12 +56,33 @@ export async function generateMetadata({ params, searchParams }, parent) {
     }
 }
 
-const Product = ({ params, searchParams }) => {
+const Product = async ({ params, searchParams }) => {
+    const id = params.id
+    let productData;
+    const carRef = doc(db, 'cars', id);
+    const accessoryRef = doc(db, 'accessories', id);
+
+    const carSnapshot = await getDoc(carRef);
+    const accessorySnapshot = await getDoc(accessoryRef);
+
+    if (carSnapshot.exists()) {
+        productData = carSnapshot.data();
+    } else {
+        productData = accessorySnapshot.data();
+    }
+    const {
+        make = '',
+        price,
+    } = productData || {};
 
     return (
         <>
             <ProductDisplay params={params} />
-            <SuggestedCars />
+            <SuggestedCars
+                id={id}
+                make={make}
+                price={price}
+            />
         </>
     )
 }

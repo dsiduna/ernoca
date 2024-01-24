@@ -5,10 +5,10 @@ import { useGetSingleCarQuery } from '../../redux/services/carsService'
 import { formatCurrency } from '../../utils/formatCurrency'
 import Image from 'next/image'
 import Link from 'next/link'
+import { capitalizeFirstLetter } from '../../utils/CapitaliseFirstLetter'
 
 const ProductDisplay = ({ params, searchParams }) => {
   const { data: productData, isLoading: isGetProductLoading } = useGetSingleCarQuery(params.id);
-  console.log(productData)
 
   const {
     name = '',
@@ -27,7 +27,6 @@ const ProductDisplay = ({ params, searchParams }) => {
     year = '',
     transmission = ''
   } = productData || {};
-  console.log(productData)
 
   const [currentImage, setCurrentImage] = useState(images[0])
 
@@ -48,7 +47,8 @@ const ProductDisplay = ({ params, searchParams }) => {
               <div className="w-full px-4">
                 <div className="sticky top-0 z-50 overflow-hidden ">
                   <div className="relative mb-6 lg:mb-10 h-[360px]">
-                    <Image src={currentImage}
+                    <Image
+                      src={currentImage}
                       alt=""
                       className="object-cover rounded-xl"
                       layout="fill"
@@ -77,7 +77,7 @@ const ProductDisplay = ({ params, searchParams }) => {
                 <div className="lg:pl-20">
                   <div className="mb-8 ">
                     <h2 className="max-w-xl text-2xl font-bold md:text-4xl">
-                      {name === '' ? make + ' ' + model : name}
+                      {capitalizeFirstLetter(name === '' ? make + ' ' + model : name)}
                     </h2>
                     <p className="inline-block mt-4 text-3xl font-bold text-slate-500">
                       <span>{formatCurrency(price)}</span>
@@ -151,7 +151,7 @@ const ProductDisplay = ({ params, searchParams }) => {
                   </div>
                   <div className="flex flex-wrap items-center -mx-4 ">
                     <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
-                    <Link href={`https://wa.me/${phone}`} target='_blank'
+                      <Link href={`https://wa.me/${phone}`} target='_blank'
                         className="flex items-center justify-center w-full gap-2 p-4 rounded-xl border border-gray-900 bg-white hover:bg-gray-100"
                       >
                         Contact Seller <span><svg fill="#25D366" height="24px" width="24px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 308 308" stroke="#25D366">
@@ -178,35 +178,14 @@ export default ProductDisplay
 
 const LoadingSkeleton = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen w-full">
-      <div className="animate-pulse max-w-6xl px-4 py-4 mx-auto">
-        <div className="flex flex-wrap -mx-4">
-          <div className="w-full px-4 md:w-1/2">
-            <div className="h-80 bg-gray-200 rounded-lg"></div>
-          </div>
-          <div className="w-full px-4 md:w-1/2">
-            <div className="lg:pl-20">
-              <div className="mb-8">
-                <div className="h-6 bg-gray-200 rounded-md"></div>
-                <div className="h-8 mt-2 mb-6 bg-gray-200 rounded-md"></div>
-                <div className="h-20 mb-8 bg-gray-200 rounded-md"></div>
-                <div className="h-16 mb-8 bg-gray-200 rounded-md"></div>
-              </div>
-              <div className="flex items-center mb-8">
-                <div className="h-6 bg-gray-200 rounded-md"></div>
-              </div>
-              <div className="flex items-center mb-8">
-                <div className="h-6 bg-gray-200 rounded-md"></div>
-              </div>
-              <div className="flex flex-wrap items-center -mx-4">
-                <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
-                  <div className="h-12 bg-blue-500 rounded-md"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <section className="overflow-hidden bg-gray-50 rounded-xl py-11 font-poppins min-h-[70vh]">
+      <div className="skeleton-wrapper">
+        <div className="skeleton-image"></div>
+        <div className="skeleton-grid"></div>
+        <div className="skeleton-grid"></div>
+        <div className="skeleton-grid"></div>
+        <div className="skeleton-grid"></div>
       </div>
-    </div>
+    </section>
   );
 }

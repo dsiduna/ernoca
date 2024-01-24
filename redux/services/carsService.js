@@ -24,7 +24,7 @@ export const carsService = createApi({
         addCar: builder.mutation({
             async queryFn(car) {
                 const carData = {
-                    make: car.make,
+                    make: car.make.trim().toLowerCase(),
                     model: car.model,
                     description: car.description,
                     price: car.price,
@@ -122,7 +122,41 @@ export const carsService = createApi({
                 }
             }
         }),
+        getSuggestedCars: builder.query({
+            async queryFn(data) {
+                const carsRef = collection(db, 'cars')
+                console.log(data)
+                try {
+                    const cars = [];
+                    const minPrice = data.price - 2500;
+                    const maxPrice = data.price + 2500;
+                    console.log(data.id);
 
+                    //cars of same make
+                    const q1 = query(carsRef, where('make', '==', data.make.toLowerCase()));
+                    const snapshot1 = await getDocs(q1);
+                    const carsOfSameMake = snapshot1.docs.map((doc) => ({ id: doc.id, ...doc.data() })).filter((item) => item.id !== data.id);
+
+                    //cars of same price range
+                    const q2 = query(carsRef, where('price', '<=', Number(maxPrice)), where('price', '>=', Number(minPrice)))
+                    const snapshot2 = await getDocs(q2);
+                    const carsOfSamePriceRange = snapshot2.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+                    console.log(carsOfSameMake)
+                    console.log(carsOfSamePriceRange)
+                    if (carsOfSameMake.length >= 4) {
+                        cars.push(...carsOfSameMake.slice(0, 4));
+                    } else {
+                        cars.push(...carsOfSameMake);
+                        const remainingSlots = 4 - carsOfSameMake.length;
+                        cars.push(...carsOfSamePriceRange.slice(0, remainingSlots));
+                    }
+
+                    return { data: cars }
+                } catch (error) {
+                    throw new Error(error.message);
+                }
+            }
+        }),
         updateCar: builder.mutation({
             async queryFn(car) {
                 const imagesToBeUploaded = car?.pictures?.filter((item) => typeof item !== 'string');
@@ -172,4 +206,5 @@ export const {
     useGetSingleCarQuery,
     useUpdateCarMutation,
     useSearchCarsMutation,
+    useGetSuggestedCarsQuery,
 } = carsService;
