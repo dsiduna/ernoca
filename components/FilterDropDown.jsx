@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
+import { capitalizeFirstLetter } from '../utils/CapitaliseFirstLetter';
 
 
 
-const FilterDropdown = ({ options, onSelect }) => {
-    const [selectedOption, setSelectedOption] = useState('');
+const FilterDropdown = ({ options, selectedOption, setSelectedOption = () => { } }) => {
 
     const handleOptionSelect = (event) => {
         const { value } = event.target;
         setSelectedOption(value);
-        onSelect(value);
     };
 
     return (
@@ -22,7 +21,7 @@ const FilterDropdown = ({ options, onSelect }) => {
                 <option value="">All</option>
                 {options.map((option) => (
                     <option key={option} value={option}>
-                        {option}
+                        {capitalizeFirstLetter(option)}
                     </option>
                 ))}
             </select>
