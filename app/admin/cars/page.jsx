@@ -68,7 +68,7 @@ const Cars = () => {
       setFilteredCars(carsOfMake);
     }
   }, [selectedOption])
-  console.log(selectedOption)
+  
   return (
     <>
       <AdminModalHOC
