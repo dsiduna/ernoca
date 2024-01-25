@@ -35,7 +35,7 @@ const ForApprovals = () => {
                 <div className='p-8 text-[32px] text-center font-semibold'>
                     Pending Approval
                 </div>
-                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pt-8 gap-2 items-center justify-center'>
+                <div className='grid xs:grid-cols-1 sm:grid-cols-2 grid-cols-3 grid-cols-4 gap-4 pt-12 gap-2 items-center justify-center'>
 
                     {isGetPendingCarsLoading ? (
                         <React.Fragment>

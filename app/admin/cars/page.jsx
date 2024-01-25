@@ -11,16 +11,31 @@ import CarCardLoading from '../../../components/adminComponents/CarCardLoading';
 
 const Cars = () => {
   const options = ['Option 1', 'Option 2', 'Option 3'];
+  const [filteredCars, setFilteredCars] = useState([]);
+  const [makes, setMakes] = useState([]);
   const [open, setOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState('');
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal.data);
 
-  const { data: cars, isLoading: isGetCarsLoading, refetch: refetchCars } = useGetCarsQuery();
+  const { data: cars, isLoading: isGetCarsLoading, refetch: refetchCars, isSuccess: isLoadingSuccess } = useGetCarsQuery();
 
   const onAddCarClick = () => {
     dispatch(updateModal('Add Car'));
     setOpen(true);
-  }
+  };
+
+  useEffect(() => {
+    if (isLoadingSuccess) {
+      setFilteredCars(cars);
+    }
+  }, [isLoadingSuccess])
+  useEffect(() => {
+    if (cars) {
+      const carMakes = [...new Set(cars?.map(car => car.make.trim().toLowerCase()))];
+      setMakes(carMakes);
+    }
+  }, [cars]);
 
   const skeletonPulses = Array.from({ length: 2 })
 
@@ -30,6 +45,30 @@ const Cars = () => {
     }
   }, [modal])
 
+
+  const handleSearch = (searchTerm) => {
+    if (searchTerm === '') {
+      setFilteredCars(cars);
+    } else {
+      const filtered = cars?.filter(
+        (item) =>
+          item.make.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.description.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredCars(filtered);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedOption === '') {
+      setFilteredCars(cars)
+    } else {
+      const carsOfMake = cars?.filter((car) => car.make.trim().toLowerCase() === selectedOption);
+      setFilteredCars(carsOfMake);
+    }
+  }, [selectedOption])
+  console.log(selectedOption)
   return (
     <>
       <AdminModalHOC
@@ -43,17 +82,18 @@ const Cars = () => {
         <div className='grid grid-cols-3 gap-4 pt-[20px]'>
           <div className='col-span-2 w-full'>
             <SearchBar
-              onSearch={() => { }}
+              onSearch={handleSearch}
             />
           </div>
           <div>
             <FilterDropdown
-              options={options}
-              onSelect={() => { }}
+              options={makes}
+              selectedOption={selectedOption}
+              setSelectedOption={setSelectedOption}
             />
           </div>
         </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pt-12 gap-2 items-center justify-center'>
+        <div className='grid xs:grid-cols-1 sm:grid-cols-2 grid-cols-3 gap-4 pt-12 gap-2 items-center justify-center'>
           <div className="h-300px bg-white shadow-xl rounded-xl flex flex-col items-center justify-center  max-w-[300px] p-8 h-48"
             onClick={onAddCarClick}
           >
@@ -83,7 +123,7 @@ const Cars = () => {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {cars?.map((car) => (
+              {filteredCars?.map((car) => (
                 <CarCard
                   setOpen={setOpen}
                   car={car}

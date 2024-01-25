@@ -28,7 +28,7 @@ export default function AdminLayout({ children }) {
             ) : (
                 <React.Fragment>
                     {user &&
-                        <section className="flex flex-col md:flex-row h-full">
+                        <section className="flex md:flex-col flex-row h-full">
                             {/* Sidebar */}
                             {!isMobile && (
                                 <aside className="bg-gray-200 w-1/5">

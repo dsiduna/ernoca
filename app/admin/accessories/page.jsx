@@ -53,7 +53,7 @@ const Accessories = () => {
             />
           </div>
         </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pt-12 gap-2 items-center justify-center'>
+        <div className='grid xs:grid-cols-1 sm:grid-cols-2 grid-cols-3 gap-4 pt-12 gap-2 items-center justify-center'>
           <div className="h-300px bg-white shadow-xl rounded-xl flex flex-col items-center justify-center  max-w-[300px] p-8 h-48"
             onClick={onAddAccessoryClick}
           >
